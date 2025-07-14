@@ -2,7 +2,16 @@
 @section('title', 'events-single')
 @section( 'content')
 
-
+@section('css')
+<style>
+    .events-left img {
+    margin-top: 35px;
+    border-radius: 5px;
+    width: 100%;
+    height: 300px;
+}
+</style>
+@endsection
 
     <!--====== PAGE BANNER PART START ======-->
 
@@ -11,12 +20,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-banner-cont">
-                        <h2>Campus clean workshop</h2>
+                        <h2>{{ $event->title }}</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Events</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Campus clean workshop</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('eacademy.events') }}">Events</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $event->title }}</li>
                             </ol>
                         </nav>
                     </div> <!-- page banner cont -->
@@ -35,12 +44,12 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="events-left">
-                            <h3>Campus clean workshop</h3>
-                            <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                            <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                            <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            <img src="{{ asset('backend/images/event/singel-event/se-1.jpg') }}" alt="Event">
-                            <p>Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam</p>
+                            <h3>{{ $event->title }}</h3>
+                            <span><i class="fa fa-calendar"></i> {{ \Carbon\Carbon::parse($event->duration)->format('d F Y') }}</span>
+                            <span><i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::parse($event->time_start)->format('h:i A') }} - {{ \Carbon\Carbon::parse($event->time_end)->format('h:i A') }}</span>
+                            <span><i class="fa fa-map-marker"></i> {{ $event->location }}</span>
+                            <img src="{{ asset('uploads/' . $event->image) }}" alt="Event">
+                            <p>{{ $event->content }}</p>
                         </div> <!-- events left -->
                     </div>
                     <div class="col-lg-4">
@@ -60,7 +69,7 @@
                                             </div>
                                             <div class="cont">
                                                 <h6>Start Time</h6>
-                                                <span>12:00 Am</span>
+                                                <span>{{ \Carbon\Carbon::parse($event->time_start)->format('h:i A') }}</span>
                                             </div>
                                         </div> <!-- singel address -->
                                     </li>
@@ -71,7 +80,7 @@
                                             </div>
                                             <div class="cont">
                                                 <h6>Finish Time</h6>
-                                                <span>05:00 Am</span>
+                                                <span>{{ \Carbon\Carbon::parse($event->time_end)->format('h:i A') }}</span>
                                             </div>
                                         </div> <!-- singel address -->
                                     </li>
@@ -82,7 +91,7 @@
                                             </div>
                                             <div class="cont">
                                                 <h6>Address</h6>
-                                                <span>Street Park ,America</span>
+                                                <span>{{ $event->location }}</span>
                                             </div>
                                         </div> <!-- singel address -->
                                     </li>

@@ -11,7 +11,7 @@
 
     <div class="top p-3"  style="display: flex; justify-content: space-between; align-items: center;">
             <div><h1>All Teachers</h1></div>
-            <div><button class="btn btn-dark"><a style="color: #fff" href="<?php echo e(route('dashboard.teachers.create')); ?>">
+            <div><button class="btn btn-dark"><a style="color: #fff" href="<?php echo e(route('dashboard.users.create')); ?>">
                 Add New Teacher
             </a> </button></div>
         </div>
@@ -24,7 +24,7 @@
             </div>
         <?php endif; ?>
 
-        
+
 
          <div class="container p-2">
             <table class="table">
@@ -41,22 +41,22 @@
     </tr>
   </thead>
   <tbody>
-    <?php $__empty_1 = true; $__currentLoopData = $teachers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teacher): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+    <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 <tr>
-      <th scope="row"><?php echo e($teacher->id); ?></th>
-      <td><?php echo e($teacher->name); ?></td>
-      <td> <img src="<?php echo e(asset('uploads/' . $teacher->image)); ?>" alt="Post Image" width="50" height="50"></td>
-      <td><?php echo e($teacher->job); ?></td>
-      <td><?php echo e($teacher->description); ?></td>
-      <td><?php echo e($teacher->bio); ?></td>
-      <td><?php echo e($teacher->created_at->format('M d, Y')); ?></td>
+      <th scope="row"><?php echo e($user->id); ?></th>
+      <td><?php echo e($user->name); ?></td>
+      <td> <img src="<?php echo e(asset('uploads/' . $user->image)); ?>" alt="Post Image" width="50" height="50"></td>
+      <td><?php echo e($user->job); ?></td>
+      <td><?php echo e($user->description); ?></td>
+      <td><?php echo e($user->bio); ?></td>
+      <td><?php echo e($user->created_at->format('M d, Y')); ?></td>
       <td>
 
-                    <a href="<?php echo e(route('dashboard.teachers.edit', $teacher->id)); ?>" class="btn btn-sm btn-primary">
+                    <a href="<?php echo e(route('dashboard.users.edit', $user->id)); ?>" class="btn btn-sm btn-primary">
                         <i class="fa fa-edit"></i> Edit
                     </a>
                     <form class="d-inline" action="<?php echo e(route('dashboard.teachers.destroy',
-                    $teacher->id)); ?>" method="post">
+                    $user->id)); ?>" method="post">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('delete'); ?>
                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
@@ -74,7 +74,7 @@
 
   </tbody>
 </table>
-<?php echo e($teachers->appends($_GET)->links()); ?>
+<?php echo e($users->appends($_GET)->links()); ?>
 
         </div>
 

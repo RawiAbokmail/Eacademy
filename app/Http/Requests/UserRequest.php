@@ -21,11 +21,22 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required|string|max:150',
-            'email' => 'required',
-            'password' => 'required',
-            // 'role' => 'required'
-        ];
+        $rules = [
+        'name' => 'required|string|max:150',
+        'email' => 'required|email|unique:users,email,' . ($this->user->id ?? 'NULL'),
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'role' => 'required|in:admin,teacher,student',
+        'job' => 'required_if:role,teacher|string|max:150',
+        'description' => 'required_if:role,teacher|string|max:500',
+        'bio' => 'required_if:role,teacher|string|max:500',
+    ];
+
+         if ($this->isMethod('post')) {
+        $rules['password'] = 'required|string|min:6';
+    } else if ($this->isMethod('put')) {
+        $rules['password'] = 'nullable|string|min:6';
+    }
+
+        return $rules;
     }
 }

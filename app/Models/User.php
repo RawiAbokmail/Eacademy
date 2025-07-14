@@ -21,7 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-    ];
+        'role',
+        'image',         
+        'job',
+        'description',
+        'bio',
+        ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,6 +49,22 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin(){
+        return $this->role === 'admin';
+    }
+
+    public function isTeacher(){
+        return $this->role === 'teacher';
+    }
+
+    public function isStudent(){
+        return $this->role === 'student';
+    }
+
+    public function teacher(){
+        return $this->hasOne(Teacher::class);
     }
 
     public function cart() {

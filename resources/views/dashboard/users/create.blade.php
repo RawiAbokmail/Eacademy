@@ -22,7 +22,7 @@
                         <h3 class="mb-0">New User Details</h3>
                     </div>
                     <div class="card-body bg-light">
-                        <form action="{{ route('dashboard.users.store') }}" method="POST" autocomplete="off">
+                        <form action="{{ route('dashboard.users.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -33,13 +33,18 @@
                                     <x-form.input type="email" name="email" label="Email Address" class="form-control rounded-pill" placeholder="Enter email" />
                                 </div>
                             </div>
+
                             <div class="form-row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
                                     <x-form.input type="password" name="password" label="Password" class="form-control rounded-pill" placeholder="Enter password" />
                                 </div>
 
+                                <div class="form-group col-md-6">
+                                    <x-form.input type="file" name="image" label="Image" class="form-control rounded-pill" />
+                                </div>
                             </div>
-                            <div class="form-group">
+
+                             <div class="form-group">
                                 <label for="role" class="font-weight-bold">Role</label>
                                 <select class="form-control rounded-pill" id="role" name="role">
                                     <option value="" disabled selected>Select role</option>
@@ -48,6 +53,23 @@
                                     <option value="student">Student</option>
                                 </select>
                             </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <x-form.input type="text" name="job" label="Job" class="form-control rounded-pill" placeholder="Enter your job" />
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <x-form.input type="text" name="description" label="Description" class="form-control rounded-pill" placeholder="Enter your description" />
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <x-form.textarea name="bio" label="Bio" class="form-control rounded-pill" placeholder="type your bio here.." />
+                                </div>
+
+
+                            </div>
+
                             <div class="form-group text-right mt-4">
                                 <button type="submit" class="btn btn-dark btn-lg rounded-pill px-5 shadow">Add User</button>
                             </div>

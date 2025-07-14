@@ -62,7 +62,7 @@
                                         <img src="{{ asset('backend/images/category/ctg-1.jpg') }}" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="{{ route('eacademy.courses') }}">
                                             <h5>App Design</h5>
                                             <span>24 courses</span>
                                         </a>
@@ -75,7 +75,7 @@
                                         <img src="{{ asset('backend/images/category/ctg-2.jpg') }}" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="{{ route('eacademy.courses') }}">
                                             <h5>App development</h5>
                                             <span>57 courses </span>
                                         </a>
@@ -88,7 +88,7 @@
                                         <img src="{{ asset('backend/images/category/ctg-3.jpg') }}" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="{{ route('eacademy.courses') }}">
                                             <h5>UI/ UX Design</h5>
                                             <span>103 courses</span>
                                         </a>
@@ -101,7 +101,7 @@
                                         <img src="{{ asset('backend/images/category/ctg-4.jpg') }}" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="{{ route('eacademy.courses') }}">
                                             <h5>Photography</h5>
                                             <span>17 courses </span>
                                         </a>
@@ -114,7 +114,7 @@
                                         <img src="{{ asset('backend/images/category/ctg-5.jpg') }}" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="{{ route('eacademy.courses') }}">
                                             <h5>Finance</h5>
                                             <span>103 courses </span>
                                         </a>
@@ -127,7 +127,7 @@
                                         <img src="{{ asset('backend/images/category/ctg-6.jpg') }}" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="{{ route('eacademy.courses') }}">
                                             <h5>Science</h5>
                                             <span>17 courses </span>
                                         </a>
@@ -180,21 +180,22 @@
                 </div>
             </div> <!-- row -->
             <div class="row course-slied mt-30">
-                <div class="col-lg-4">
+                @foreach($courses as $course)
+                    <div class="col-lg-4">
                     <div class="singel-course-2">
                         <div class="thum">
                             <div class="image">
-                                <img src="{{ asset('backend/images/course/cu-1.jpg') }}" alt="Course">
+                                <img src="{{ asset('uploads/' . $course->image) }}" alt="Course">
                             </div>
                             <div class="price">
-                                <span>Free</span>
+                                <span>{{ $course->is_paid ? 'Paid' : 'Free' }}</span>
                             </div>
                             <div class="course-teacher">
                                 <div class="thum">
-                                    <a href="courses-singel.html"><img src="{{ asset('backend/images/course/teacher/t-1.jpg') }}" alt="teacher"></a>
+                                    <a href="courses-singel.html"><img src="{{ asset('uploads/' . $course->teacher->image) }}" alt="teacher"></a>
                                 </div>
                                 <div class="name">
-                                    <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
+                                    <a href="teachers-singel.php"><h6>{{ $course->teacher->name }}</h6></a>
                                 </div>
                                 <div class="review">
                                     <ul>
@@ -208,11 +209,12 @@
                             </div>
                         </div>
                         <div class="cont">
-                            <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
+                            <a href="{{ route('eacademy.courses-single', $course) }}"><h4>{{ $course->title }}</h4></a>
                         </div>
                     </div> <!-- singel course -->
                 </div>
-                <div class="col-lg-4">
+                @endforeach
+                {{-- <div class="col-lg-4">
                     <div class="singel-course-2">
                         <div class="thum">
                             <div class="image">
@@ -339,7 +341,7 @@
                             <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
                         </div>
                     </div> <!-- singel course -->
-                </div>
+                </div> --}}
             </div> <!-- course slied -->
         </div> <!-- container -->
     </section>
@@ -348,7 +350,9 @@
 
     <!--====== COUNTER PART START ======-->
 
-    <div id="counter-part" class="bg_cover pt-65 pb-110" data-overlay="8" style="background-image: url({{ asset('backend/images/bg-2.jpg') }})">
+    <x-counter-part :coursesCount="$coursesCount" :people="$people" :studentsCount="$studentsCount" :teachersCount="$teachersCount" />
+
+    {{-- <div id="counter-part" class="bg_cover pt-65 pb-110" data-overlay="8" style="background-image: url({{ asset('backend/images/bg-2.jpg') }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
@@ -377,7 +381,7 @@
                 </div>
             </div> <!-- row -->
         </div> <!-- container -->
-    </div>
+    </div> --}}
 
     <!--====== COUNTER PART ENDS ======-->
 

@@ -14,7 +14,7 @@
                         <h2>Events</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Events</li>
                             </ol>
                         </nav>
@@ -31,92 +31,27 @@
     <section id="event-page" class="pt-90 pb-120 gray-bg">
         <div class="container">
            <div class="row">
-               <div class="col-lg-6">
+               @foreach ($events as $event)
+                <div class="col-lg-6">
                    <div class="singel-event-list mt-30">
                        <div class="event-thum">
-                           <img src="{{ asset('backend/images/event/e-1.jpg') }}" alt="Event">
+                           <img src="{{ asset('uploads/' . $event->image) }}" alt="Event">
                        </div>
                        <div class="event-cont">
-                           <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                            <a href="events-singel.php"><h4>Tech Summit</h4></a>
-                            <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                            <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            <p>Nam nec tellus a odio tincidunt auctor a ornare odionon mauris itae erat conuat</p>
+                           <span><i class="fa fa-calendar"></i> {{ \Carbon\Carbon::parse($event->duration)->format('d F Y') }}
+</span>
+                            <a href="{{ route('eacademy.events-single', $event) }}"><h4>{{ $event->title }}</h4></a>
+                            <span><i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::parse($event->time_start)->format('h:i A') }} - {{ \Carbon\Carbon::parse($event->time_end)->format('h:i A') }}</span>
+                            <span><i class="fa fa-map-marker"></i> {{ $event->location }}</span>
+                            <p>{{ $event->description }}</p>
                        </div>
                    </div>
                </div>
-               <div class="col-lg-6">
-                   <div class="singel-event-list mt-30">
-                       <div class="event-thum">
-                           <img src="{{ asset('backend/images/event/e-2.jpg') }}" alt="Event">
-                       </div>
-                       <div class="event-cont">
-                           <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                            <a href="events-singel.php"><h4>Tech Summit</h4></a>
-                            <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                            <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            <p>Nam nec tellus a odio tincidunt auctor a ornare odionon mauris itae erat conuat</p>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-lg-6">
-                   <div class="singel-event-list mt-30">
-                       <div class="event-thum">
-                           <img src="{{ asset('backend/images/event/e-3.jpg') }}" alt="Event">
-                       </div>
-                       <div class="event-cont">
-                           <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                            <a href="events-singel.php"><h4>Tech Summit</h4></a>
-                            <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                            <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            <p>Nam nec tellus a odio tincidunt auctor a ornare odionon mauris itae erat conuat</p>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-lg-6">
-                   <div class="singel-event-list mt-30">
-                       <div class="event-thum">
-                           <img src="{{ asset('backend/images/event/e-4.jpg') }}" alt="Event">
-                       </div>
-                       <div class="event-cont">
-                           <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                            <a href="events-singel.php"><h4>Tech Summit</h4></a>
-                            <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                            <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            <p>Nam nec tellus a odio tincidunt auctor a ornare odionon mauris itae erat conuat</p>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-lg-6">
-                   <div class="singel-event-list mt-30">
-                       <div class="event-thum">
-                           <img src="{{ asset('backend/images/event/e-1.jpg') }}" alt="Event">
-                       </div>
-                       <div class="event-cont">
-                           <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                            <a href="events-singel.php"><h4>Tech Summit</h4></a>
-                            <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                            <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            <p>Nam nec tellus a odio tincidunt auctor a ornare odionon mauris itae erat conuat</p>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-lg-6">
-                   <div class="singel-event-list mt-30">
-                       <div class="event-thum">
-                           <img src="{{ asset('backend/images/event/e-2.jpg') }}" alt="Event">
-                       </div>
-                       <div class="event-cont">
-                           <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                            <a href="events-singel.php"><h4>Tech Summit</h4></a>
-                            <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                            <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            <p>Nam nec tellus a odio tincidunt auctor a ornare odionon mauris itae erat conuat</p>
-                       </div>
-                   </div>
-               </div>
+               @endforeach
            </div> <!-- row -->
-            <div class="row">
+
+           {{ $events->appends($_GET)->links()}}
+            {{-- <div class="row">
                 <div class="col-lg-12">
                     <nav class="courses-pagination mt-50">
                         <ul class="pagination justify-content-center">
@@ -136,7 +71,7 @@
                         </ul>
                     </nav>  <!-- courses pagination -->
                 </div>
-            </div>  <!-- row -->
+            </div>  <!-- row --> --}}
         </div> <!-- container -->
     </section>
 

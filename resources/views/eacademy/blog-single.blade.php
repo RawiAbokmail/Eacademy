@@ -6,17 +6,17 @@
 
     <!--====== PAGE BANNER PART START ======-->
 
-    <section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8" style="background-image: url({{ asset('backend/images/page-banner-4.jpg') }})">
+        <section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8" style="background-image: url({{ asset('backend/images/page-banner-4.jpg') }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-banner-cont">
-                        <h2>Few tips for get better</h2>
+                        <h2>{{ $blog->sub_title }}</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Blog</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Few tips for get better</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('eacademy.blogs') }}">Blog</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $blog->sub_title }}</li>
                             </ol>
                         </nav>
                     </div>  <!-- page banner cont -->
@@ -29,28 +29,26 @@
 
     <!--====== BLOG PART START ======-->
 
-    <section id="blog-singel" class="pt-90 pb-120 gray-bg">
+        <section id="blog-singel" class="pt-90 pb-120 gray-bg">
         <div class="container">
            <div class="row">
               <div class="col-lg-8">
                   <div class="blog-details mt-30">
                       <div class="thum">
-                          <img src="{{ asset('backend/images/blog/b-1.jpg') }}" alt="Blog Details">
+                          <img src="{{ asset('uploads/' . $blog->image) }}" alt="{{ $blog->sub_title }}">
                       </div>
                       <div class="cont">
-                          <h3>Few tips for get better results in examination</h3>
+                          <h3>{{ $blog->title }}</h3>
                           <ul>
-                               <li><a href="#"><i class="fa fa-calendar"></i>25 Dec 2018</a></li>
+                               <li><a href="#"><i class="fa fa-calendar"></i>{{ $blog->created_at }}</a></li>
                                <li><a href="#"><i class="fa fa-user"></i>Mark anthem</a></li>
-                               <li><a href="#"><i class="fa fa-tags"></i>Education</a></li>
+                               <li><a href="#"><i class="fa fa-tags"></i> @foreach ($blog->tags as $tag)
+                                <span class="badge">{{ $tag->name }}</span>
+                                @endforeach
+                             </a></li>
                            </ul>
-                           <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .
-                           <br>
-                           <br>
-                           gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .
-                           <br>
-                           <br>
-                           gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .
+                           <p>
+                            {{ $blog->content }}
                            </p>
                            <ul class="share">
                                <li class="title">Share :</li>

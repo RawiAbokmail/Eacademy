@@ -3,6 +3,14 @@
 @section( 'content')
 
 
+@section('css')
+<style>
+    .singel-blog .blog-thum img {
+    width: 100%;
+    max-height: 300px;
+}
+</style>
+@endsection
 
     <!--====== PAGE BANNER PART START ======-->
 
@@ -14,7 +22,7 @@
                         <h2>Blog</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Blog</li>
                             </ol>
                         </nav>
@@ -32,36 +40,29 @@
         <div class="container">
            <div class="row">
                <div class="col-lg-8">
-                   <div class="singel-blog mt-30">
+                   @foreach($blogs as $blog)
+                    <div class="singel-blog mt-30">
                        <div class="blog-thum">
-                           <img src="{{ asset('backend/images/blog/b-1.jpg') }}" alt="Blog">
+                           <img src="{{ asset('uploads/'. $blog->image) }}" alt="Blog">
                        </div>
                        <div class="blog-cont">
-                           <a href="blog-singel.php"><h3>Few tips for get better results in examination</h3></a>
+                           <a href="{{ route('eacademy.blog-single', $blog) }}"><h3>{{ $blog->title }}</h3></a>
                            <ul>
-                               <li><a href="#"><i class="fa fa-calendar"></i>25 Dec 2018</a></li>
+                               <li><a href="#"><i class="fa fa-calendar"></i>{{ $blog->created_at }}</a></li>
                                <li><a href="#"><i class="fa fa-user"></i>Mark anthem</a></li>
-                               <li><a href="#"><i class="fa fa-tags"></i>Education</a></li>
+                               <li><a href="#"><i class="fa fa-tags"></i>@foreach ($blog->tags as $tag)
+                                <span class="badge">{{ $tag->name }}</span>
+                                @endforeach</a></li>
                            </ul>
-                           <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
+                           <p>{{ $blog->content }}</p>
                        </div>
                    </div> <!-- singel blog -->
-                   <div class="singel-blog mt-30">
-                       <div class="blog-thum">
-                           <img src="{{ asset('backend/images/blog/b-2.jpg') }}" alt="Blog">
-                       </div>
-                       <div class="blog-cont">
-                           <a href="blog-singel.php"><h3>Few tips for get better results in examination</h3></a>
-                           <ul>
-                               <li><a href="#"><i class="fa fa-calendar"></i>25 Dec 2018</a></li>
-                               <li><a href="#"><i class="fa fa-user"></i>Mark anthem</a></li>
-                               <li><a href="#"><i class="fa fa-tags"></i>Education</a></li>
-                           </ul>
-                           <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
-                       </div>
-                   </div> <!-- singel blog -->
-                   <nav class="courses-pagination mt-50">
+                   @endforeach
+                    {{ $blogs->appends($_GET)->links()}}
+
+                   {{-- <nav class="courses-pagination mt-50">
                         <ul class="pagination justify-content-lg-end justify-content-center">
+
                             <li class="page-item">
                                 <a href="#" aria-label="Previous">
                                     <i class="fa fa-angle-left"></i>
@@ -76,29 +77,28 @@
                                 </a>
                             </li>
                         </ul>
-                    </nav>  <!-- courses pagination -->
+                    </nav>  <!-- courses pagination --> --}}
                </div>
                <div class="col-lg-4">
                    <div class="saidbar">
                        <div class="row">
                            <div class="col-lg-12 col-md-6">
                                <div class="saidbar-search mt-30">
-                                   <form action="#">
-                                       <input type="text" placeholder="Search">
-                                       <button type="button"><i class="fa fa-search"></i></button>
+                                   <form action="{{ route('eacademy.blogs') }}" method="GET">
+                                       <input type="text" name="search" value="{{ request('search') }}" placeholder="Search">
+                                       <button type="submit"><i class="fa fa-search"></i></button>
                                    </form>
                                </div> <!-- saidbar search -->
                                <div class="categories mt-30">
                                    <h4>Categories</h4>
                                    <ul>
-                                       <li><a href="#">Fronted</a></li>
-                                       <li><a href="#">Backend</a></li>
-                                       <li><a href="#">Photography</a></li>
-                                       <li><a href="#">Teachnology</a></li>
-                                       <li><a href="#">GMET</a></li>
-                                       <li><a href="#">Language</a></li>
-                                       <li><a href="#">Science</a></li>
-                                       <li><a href="#">Accounting</a></li>
+                                    @foreach ($categories as $category)
+                                    <li>
+                                        <a href="{{ route('eacademy.blogs', ['category' =>          $category->slug]) }}" class="d-block mb-2">
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
+                                    @endforeach
                                    </ul>
                                </div>
                            </div> <!-- categories -->

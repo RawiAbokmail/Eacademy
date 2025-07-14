@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
     //
     protected $guarded = [];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 
      public function category()
     {
@@ -24,5 +31,10 @@ class Blog extends Model
         return $this->hasMany(Comment::class);
     }
 
+    // protected static function booted(){
+    //     static::creating(function ($blog) {
+    //         $blog->slug = Str::random(10);
+    //     });
+    // }
 
 }

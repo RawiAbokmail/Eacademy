@@ -21,14 +21,15 @@ class BlogRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            'title' => 'required|string|max:255',
+        'title' => 'required|string|max:255|',
         'sub_title' => 'nullable|string',
         'content' => 'required|string',
         'category_id' => 'required|exists:categories,id',
-        'tags' => 'array',
-        'tags.*' => 'exists:tags,id',
         'image' => 'nullable|image|max:2048',
+        'tags' => 'nullable|array',
+        'tags.*' => 'exists:tags,id',
         ];
     }
 }

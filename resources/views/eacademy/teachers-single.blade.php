@@ -14,7 +14,7 @@
                         <h2>Teachers</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Teachers</li>
                             </ol>
                         </nav>
@@ -34,11 +34,11 @@
                 <div class="col-lg-4 col-md-8">
                     <div class="teachers-left mt-50">
                         <div class="hero">
-                            <img src="{{ asset('backend/images/teachers/t-1.jpg') }}" alt="Teachers">
+                            <img src="{{ asset('uploads/' . $teacher->image) }}" alt="Teachers">
                         </div>
                         <div class="name">
-                            <h6>Mark alen</h6>
-                            <span>Vice chencelor</span>
+                            <h6>{{ $teacher->name }}</h6>
+                            <span>{{ $teacher->job }}</span>
                         </div>
                         <div class="social">
                             <ul>

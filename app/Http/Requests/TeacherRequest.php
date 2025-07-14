@@ -21,12 +21,20 @@ class TeacherRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
-            'job' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'bio' => 'required|string|max:2000',
-        ];
+         $rules = [
+        'name' => 'required|string|max:150',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'job' => 'required_if:role,teacher|string|max:150',
+        'description' => 'required_if:role,teacher|string|max:500',
+        'bio' => 'required_if:role,teacher|string|max:500',
+    ];
+
+         if ($this->isMethod('post')) {
+        $rules['password'] = 'required|string|min:6';
+    } else if ($this->isMethod('put')) {
+        $rules['password'] = 'nullable|string|min:6';
+    }
+
+        return $rules;
     }
 }

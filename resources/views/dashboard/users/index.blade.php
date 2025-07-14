@@ -22,6 +22,7 @@
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Role</th>
       <th scope="col">Created at</th>
       <th scope="col">Action</th>
     </tr>
@@ -34,18 +35,21 @@
       <th scope="row">{{ $user->id }}</th>
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
+      <td>{{ ucfirst($user->role) }}</td>
       <td>{{ $user->created_at->format('M d, Y') }}</td>
       <td>
 
                     <a href="{{ route('dashboard.users.edit', $user->id) }}" class="btn btn-sm btn-primary">
                         <i class="fa fa-edit"></i> Edit
                     </a>
+                    @if($user->role !== 'admin')
                     <form class="d-inline" action="{{ route('dashboard.users.destroy',
                     $user->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 </form>
+                    @endif
 
 
                 </td>

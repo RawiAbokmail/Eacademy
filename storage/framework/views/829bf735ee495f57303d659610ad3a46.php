@@ -56,14 +56,14 @@
                                  <div class="form-group col-md-6">
                                     <?php if (isset($component)) { $__componentOriginal5c2a97ab476b69c1189ee85d1a95204b = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal5c2a97ab476b69c1189ee85d1a95204b = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.form.input','data' => ['type' => 'file','name' => 'image','label' => 'Image','class' => 'form-control rounded-pill','value' => ''.e($teacher->image).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.form.input','data' => ['type' => 'file','name' => 'image','label' => 'Image','class' => 'form-control rounded-pill']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('form.input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['type' => 'file','name' => 'image','label' => 'Image','class' => 'form-control rounded-pill','value' => ''.e($teacher->image).'']); ?>
+<?php $component->withAttributes(['type' => 'file','name' => 'image','label' => 'Image','class' => 'form-control rounded-pill']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal5c2a97ab476b69c1189ee85d1a95204b)): ?>
@@ -74,6 +74,8 @@
 <?php $component = $__componentOriginal5c2a97ab476b69c1189ee85d1a95204b; ?>
 <?php unset($__componentOriginal5c2a97ab476b69c1189ee85d1a95204b); ?>
 <?php endif; ?>
+                                    <img class="img-thumbnail mt-1" src="<?php echo e(asset('uploads/' . $teacher->image)); ?>" width="40" class="mt-2" style="border-radius: 50%">
+
                                 </div>
                             </div>
                             <div class="form-row">

@@ -9,6 +9,11 @@ class Category extends Model
 
     protected $guarded = [];
 
+    function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     function blogs(){
         return $this->hasMany(Blog::class);
     }
@@ -20,5 +25,5 @@ class Category extends Model
     function courses(){
         return $this->hasMany(Course::class);
     }
-  
+
 }

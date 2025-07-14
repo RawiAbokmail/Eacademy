@@ -3,7 +3,8 @@
     'name',
     'label',
     'placeholder' => '',
-    'value' => old($name)
+    'value' => old($name, $value ?? '')
+
 ])
 <div class="mb-3">
     @if(isset($label))

@@ -96,6 +96,28 @@
                     <div class="col-lg-4">
                         <div class="header-social text-lg-right text-center">
                             <ul>
+                                {{-- <li class="nav-item">
+                                        <a href="{{ route('login') }}"  style="color: #fff; ">Login</a> <span>/</span> <a href="{{ route('register') }}"  style="color: #fff; ">sign in</a>
+                                    </li> --}}
+
+                                <li class="nav-item">
+                                     @guest
+                                        <a href="{{ route('login') }}" style="color: #fff;">Login</a>
+                                        <span>/</span>
+                                        <a href="{{ route('register') }}" style="color: #fff;">Sign in</a>
+                                    @endguest
+
+                                    @auth
+                                        <a href="{{ route('logout') }}"style="color: #fff;"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                        </form>
+                                    @endauth
+                                </li>
+
                                 <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
@@ -106,7 +128,6 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- header top -->
-
         <div class="navigation navigation-2">
             <div class="container">
                 <div class="row no-gutters">
@@ -147,6 +168,7 @@
                                     <li class="nav-item">
                                         <a class="{{ request()->routeIs('eacademy.contact')? 'active' : '' }}" href="{{ route('eacademy.contact') }}">Contact</a>
                                     </li>
+
                                 </ul>
                             </div>
                         </nav> <!-- nav -->
@@ -183,7 +205,6 @@
     </div>
 
     <!--====== SEARCH BOX PART ENDS ======-->
-
 
 @yield('content')
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +17,8 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::latest()->paginate(5);
-        return view('dashboard.teachers.index', compact('teachers'));
+        $users = User::where('role', 'teacher')->latest()->paginate(5);
+        return view('dashboard.teachers.index', compact( 'teachers','users'));
     }
 
     /**
@@ -32,21 +34,17 @@ class TeacherController extends Controller
      */
     public function store(TeacherRequest $request)
     {
-        // 1. validation done
+         $data = $request->validated();
 
-        // 2. save file
-         $data = $request->except('_token');
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('uploads', 'custom');
-            $data['image'] = $path;
-        }
-        // 3. save data
-        $teacher = Teacher::create($data);
+         Teacher::create([
+        'user_id' => $data['user_id'], // تأكد أن user_id موجود في ال Request وفي rules
+        'name' => $data['name'],
+        'image' => $data['image'] ?? null,
+        'job' => $data['job'] ?? null,
+        'description' => $data['description'] ?? null,
+        'bio' => $data['bio'] ?? null,
+    ]);
 
-        return redirect()
-            ->route('dashboard.teachers.index')
-            ->with('success', 'Teacher Added successfully')
-            ->with('type', 'success');
     }
 
     public function edit(Teacher $teacher)
@@ -70,7 +68,6 @@ class TeacherController extends Controller
         if ($teacher->image && file_exists(public_path($teacher->image))) {
             unlink(public_path($teacher->image));
         }
-
         // Store the new image
         $path = $request->file('image')->store('uploads', 'custom');
         $data['image'] = $path;

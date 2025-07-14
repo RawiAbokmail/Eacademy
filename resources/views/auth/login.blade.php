@@ -1,7 +1,4 @@
 <x-guest-layout>
-    <a href="{{ url('register') }}" style="color: #fff">
-        <button class="btn btn-info p-15">Register</button>
-    </a>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

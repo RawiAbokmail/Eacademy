@@ -9,7 +9,12 @@ class Course extends Model
     //
     protected $guarded = [];
 
-    public function categories(){
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function category(){
         return $this->belongsTo(Category::class);
     }
 

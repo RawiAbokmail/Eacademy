@@ -2,7 +2,7 @@
 
     <div class="top p-3"  style="display: flex; justify-content: space-between; align-items: center;">
             <div><h1>All Teachers</h1></div>
-            <div><button class="btn btn-dark"><a style="color: #fff" href="{{ route('dashboard.teachers.create') }}">
+            <div><button class="btn btn-dark"><a style="color: #fff" href="{{ route('dashboard.users.create') }}">
                 Add New Teacher
             </a> </button></div>
         </div>
@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        
+
 
          <div class="container p-2">
             <table class="table">
@@ -31,22 +31,22 @@
     </tr>
   </thead>
   <tbody>
-    @forelse ($teachers as $teacher)
+    @forelse ($users as $user)
 <tr>
-      <th scope="row">{{ $teacher->id }}</th>
-      <td>{{ $teacher->name }}</td>
-      <td> <img src="{{ asset('uploads/' . $teacher->image) }}" alt="Post Image" width="50" height="50"></td>
-      <td>{{ $teacher->job }}</td>
-      <td>{{ $teacher->description }}</td>
-      <td>{{ $teacher->bio }}</td>
-      <td>{{ $teacher->created_at->format('M d, Y') }}</td>
+      <th scope="row">{{ $user->id }}</th>
+      <td>{{ $user->name }}</td>
+      <td> <img src="{{ asset('uploads/' . $user->image) }}" alt="Post Image" width="50" height="50"></td>
+      <td>{{ $user->job }}</td>
+      <td>{{ $user->description }}</td>
+      <td>{{ $user->bio }}</td>
+      <td>{{ $user->created_at->format('M d, Y') }}</td>
       <td>
 
-                    <a href="{{ route('dashboard.teachers.edit', $teacher->id) }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('dashboard.users.edit', $user->id) }}" class="btn btn-sm btn-primary">
                         <i class="fa fa-edit"></i> Edit
                     </a>
                     <form class="d-inline" action="{{ route('dashboard.teachers.destroy',
-                    $teacher->id) }}" method="post">
+                    $user->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
@@ -64,7 +64,7 @@
 
   </tbody>
 </table>
-{{ $teachers->appends($_GET)->links()}}
+{{ $users->appends($_GET)->links()}}
         </div>
 
 

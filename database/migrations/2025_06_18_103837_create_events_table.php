@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('location');
-            $table->dateTime('time_start');
-            $table->dateTime('time_end');
+            $table->time('time_start');
+            $table->time('time_end');
             $table->string('image')->nullable();
             $table->timestamps();
         });

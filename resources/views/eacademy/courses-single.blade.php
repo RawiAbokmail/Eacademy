@@ -2,7 +2,17 @@
 @section('title', 'Courses-single')
 @section( 'content')
 
-
+@section('css')
+<style>
+    .corses-singel-left .course-terms ul li .teacher-name .thum img {
+    border-radius: 50%;
+    max-width: 50px;
+}
+.author-thum img{
+    max-width: 150px;
+}
+</style>
+@endsection
 
     <!--====== PAGE BANNER PART START ======-->
 
@@ -11,12 +21,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-banner-cont">
-                        <h2>Learn basic javascript</h2>
+                        <h2>{{ $course->title }}</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Courses</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Learn basic javasript</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('eacademy.courses') }}">Courses</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $course->title }}</li>
                             </ol>
                         </nav>
                     </div>  <!-- page banner cont -->
@@ -35,25 +45,25 @@
                 <div class="col-lg-8">
                     <div class="corses-singel-left mt-30">
                         <div class="title">
-                            <h3>Learn basis javascirpt from start for beginner</h3>
+                            <h3>{{ $course->title }}</h3>
                         </div> <!-- title -->
                         <div class="course-terms">
                             <ul>
                                 <li>
                                     <div class="teacher-name">
                                         <div class="thum">
-                                            <img src="{{ asset('backend/images/course/teacher/t-1.jpg') }}" alt="Teacher">
+                                            <img src="{{ asset('uploads/' . $course->teacher->image) }}" alt="Teacher">
                                         </div>
                                         <div class="name">
                                             <span>Teacher</span>
-                                            <h6>Mark anthem</h6>
+                                            <h6>{{ $course->teacher->name }}</h6>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="course-category">
                                         <span>Category</span>
-                                        <h6>Programaming </h6>
+                                        <h6>{{ $course->category->name }}</h6>
                                     </div>
                                 </li>
                                 <li>
@@ -73,7 +83,7 @@
                         </div> <!-- course terms -->
 
                         <div class="corses-singel-image pt-50">
-                            <img src="{{ asset('backend/images/course/cu-1.jpg') }}" alt="Courses">
+                            <img src="{{ asset('uploads/' . $course->image) }}" alt="Courses">
                         </div> <!-- corses singel image -->
 
                         <div class="corses-tab mt-30">
@@ -100,8 +110,8 @@
                                             <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
                                         </div>
                                         <div class="singel-description pt-40">
-                                            <h6>Requrements</h6>
-                                            <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
+                                            <h6>Requirements</h6>
+                                            <p>{{ $course->requirements }}</p>
                                         </div>
                                     </div> <!-- overview description -->
                                 </div>
@@ -245,11 +255,11 @@
                                     <div class="instructor-cont">
                                         <div class="instructor-author">
                                             <div class="author-thum">
-                                                <img src="{{ asset('backend/images/instructor/i-1.jpg') }}" alt="Instructor">
+                                                <img src="{{ asset('uploads/' . $course->teacher->image) }}" alt="Instructor">
                                             </div>
                                             <div class="author-name">
-                                                <a href="#"><h5>Sumon Hasan</h5></a>
-                                                <span>Senior WordPress Developer</span>
+                                                <a href="#"><h5>{{ $course->teacher->name }}</h5></a>
+                                                <span>{{ $course->teacher->job }}</span>
                                                 <ul class="social">
                                                     <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
                                                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -259,7 +269,7 @@
                                             </div>
                                         </div>
                                         <div class="instructor-description pt-25">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus fuga ratione molestiae unde provident quibusdam sunt, doloremque. Error omnis mollitia, ex dolor sequi. Et, quibusdam excepturi. Animi assumenda, consequuntur dolorum odio sit inventore aliquid, optio fugiat alias. Veritatis minima, dicta quam repudiandae repellat non sit, distinctio, impedit, expedita tempora numquam?</p>
+                                            <p>{{ $course->teacher->bio }}</p>
                                         </div>
                                     </div> <!-- instructor cont -->
                                 </div>
@@ -404,7 +414,7 @@
                             <div class="course-features mt-30">
                                <h4>Course Features </h4>
                                 <ul>
-                                    <li><i class="fa fa-clock-o"></i>Duaration : <span>10 Hours</span></li>
+                                    <li><i class="fa fa-clock-o"></i>Duaration : <span>{{ $course->duration }}</span></li>
                                     <li><i class="fa fa-clone"></i>Leactures : <span>09</span></li>
                                     <li><i class="fa fa-beer"></i>Quizzes :  <span>05</span></li>
                                     <li><i class="fa fa-user-o"></i>Students :  <span>100</span></li>
@@ -463,17 +473,18 @@
                 <div class="col-lg-8">
                     <div class="releted-courses pt-95">
                         <div class="title">
-                            <h3>Releted Courses</h3>
+                            <h3>Related Courses</h3>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            @foreach($relatedCourses as $related)
+                                <div class="col-md-6">
                                 <div class="singel-course mt-30">
                                     <div class="thum">
                                         <div class="image">
-                                            <img src="{{ asset('backend/images/course/cu-2.jpg') }}" alt="Course">
+                                            <img src="{{ asset('uploads/' . $related->image) }}" alt="Course">
                                         </div>
                                         <div class="price">
-                                            <span>Paid</span>
+                                            <span>{{ $related->is_paid ? 'paid' : 'free' }}</span>
                                         </div>
                                     </div>
                                     <div class="cont">
@@ -485,13 +496,13 @@
                                             <li><i class="fa fa-star"></i></li>
                                         </ul>
                                         <span>(20 Reviws)</span>
-                                        <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
+                                        <a href="{{ route('eacademy.courses-single', $related) }}"><h4>{{ $related->title }}</h4></a>
                                         <div class="course-teacher">
                                             <div class="thum">
-                                                <a href="#"><img src="{{ asset('backend/images/course/teacher/t-2.jpg') }}" alt="teacher"></a>
+                                                <a href="#"><img src="{{ asset('uploads/' . $related->teacher->image) }}" alt="teacher"></a>
                                             </div>
                                             <div class="name">
-                                                <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
+                                                <a href="teachers-singel.php"><h6>{{ $related->teacher->name }}</h6></a>
                                             </div>
                                             <div class="admin">
                                                 <ul>
@@ -503,43 +514,9 @@
                                     </div>
                                 </div> <!-- singel course -->
                             </div>
-                            <div class="col-md-6">
-                                <div class="singel-course mt-30">
-                                    <div class="thum">
-                                        <div class="image">
-                                            <img src="{{ asset('backend/images/course/cu-1.jpg') }}" alt="Course">
-                                        </div>
-                                        <div class="price">
-                                            <span>Paid</span>
-                                        </div>
-                                    </div>
-                                    <div class="cont">
-                                        <ul>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                        </ul>
-                                        <span>(20 Reviws)</span>
-                                        <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                                        <div class="course-teacher">
-                                            <div class="thum">
-                                                <a href="#"><img src="{{ asset('backend/images/course/teacher/t-3.jpg') }}" alt="teacher"></a>
-                                            </div>
-                                            <div class="name">
-                                                <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
-                                            </div>
-                                            <div class="admin">
-                                                <ul>
-                                                    <li><i class="fa fa-user"></i><span>31</span></li>
-                                                    <li><i class="fa fa-heart"></i><span>10</span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- singel course -->
-                            </div>
+                            @endforeach
+
+
                         </div> <!-- row -->
                     </div> <!-- releted courses -->
                 </div>

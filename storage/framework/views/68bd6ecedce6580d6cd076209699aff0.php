@@ -32,6 +32,7 @@
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Role</th>
       <th scope="col">Created at</th>
       <th scope="col">Action</th>
     </tr>
@@ -44,18 +45,21 @@
       <th scope="row"><?php echo e($user->id); ?></th>
       <td><?php echo e($user->name); ?></td>
       <td><?php echo e($user->email); ?></td>
+      <td><?php echo e(ucfirst($user->role)); ?></td>
       <td><?php echo e($user->created_at->format('M d, Y')); ?></td>
       <td>
 
                     <a href="<?php echo e(route('dashboard.users.edit', $user->id)); ?>" class="btn btn-sm btn-primary">
                         <i class="fa fa-edit"></i> Edit
                     </a>
+                    <?php if($user->role !== 'admin'): ?>
                     <form class="d-inline" action="<?php echo e(route('dashboard.users.destroy',
                     $user->id)); ?>" method="post">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('delete'); ?>
                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 </form>
+                    <?php endif; ?>
 
 
                 </td>

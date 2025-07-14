@@ -6,7 +6,8 @@ $__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames(([
     'name' => '',
     'label',
     'placeholder' => '',
-    'value' => old('name')
+    'value' => old($name, $value ?? '')
+
 ]));
 
 foreach ($attributes->all() as $__key => $__value) {
@@ -27,7 +28,8 @@ foreach (array_filter(([
     'name' => '',
     'label',
     'placeholder' => '',
-    'value' => old('name')
+    'value' => old($name, $value ?? '')
+
 ]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
     $$__key = $$__key ?? $__value;
 }
@@ -69,7 +71,7 @@ unset($__errorArgs, $__bag); ?>
     
     <?php if($type == 'file' && $value): ?>
         <div>
-            <img class="img-thumbnail mt-1" width="120" src="<?php echo e(asset($value)); ?>" alt="">
+            <img class="img-thumbnail mt-1" width="100" src="<?php echo e(asset('uploads/' . $value)); ?>" alt="">
         </div>
     <?php endif; ?>
 

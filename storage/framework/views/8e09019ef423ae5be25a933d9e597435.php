@@ -96,6 +96,26 @@
                     <div class="col-lg-4">
                         <div class="header-social text-lg-right text-center">
                             <ul>
+                                
+
+                                <li class="nav-item">
+                                     <?php if(auth()->guard()->guest()): ?>
+                                        <a href="<?php echo e(route('login')); ?>" style="color: #fff;">Login</a>
+                                        <span>/</span>
+                                        <a href="<?php echo e(route('register')); ?>" style="color: #fff;">Sign in</a>
+                                    <?php endif; ?>
+
+                                    <?php if(auth()->guard()->check()): ?>
+                                        <a href="<?php echo e(route('logout')); ?>"style="color: #fff;"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                Logout
+                                        </a>
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                                <?php echo csrf_field(); ?>
+                                        </form>
+                                    <?php endif; ?>
+                                </li>
+
                                 <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
@@ -106,7 +126,6 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- header top -->
-
         <div class="navigation navigation-2">
             <div class="container">
                 <div class="row no-gutters">
@@ -147,6 +166,7 @@
                                     <li class="nav-item">
                                         <a class="<?php echo e(request()->routeIs('eacademy.contact')? 'active' : ''); ?>" href="<?php echo e(route('eacademy.contact')); ?>">Contact</a>
                                     </li>
+
                                 </ul>
                             </div>
                         </nav> <!-- nav -->
@@ -183,7 +203,6 @@
     </div>
 
     <!--====== SEARCH BOX PART ENDS ======-->
-
 
 <?php echo $__env->yieldContent('content'); ?>
 

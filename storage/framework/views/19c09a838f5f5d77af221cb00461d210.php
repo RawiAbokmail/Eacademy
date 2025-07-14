@@ -61,7 +61,7 @@
                                         <img src="<?php echo e(asset('backend/images/category/ctg-1.jpg')); ?>" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="<?php echo e(route('eacademy.courses')); ?>">
                                             <h5>App Design</h5>
                                             <span>24 courses</span>
                                         </a>
@@ -74,7 +74,7 @@
                                         <img src="<?php echo e(asset('backend/images/category/ctg-2.jpg')); ?>" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="<?php echo e(route('eacademy.courses')); ?>">
                                             <h5>App development</h5>
                                             <span>57 courses </span>
                                         </a>
@@ -87,7 +87,7 @@
                                         <img src="<?php echo e(asset('backend/images/category/ctg-3.jpg')); ?>" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="<?php echo e(route('eacademy.courses')); ?>">
                                             <h5>UI/ UX Design</h5>
                                             <span>103 courses</span>
                                         </a>
@@ -100,7 +100,7 @@
                                         <img src="<?php echo e(asset('backend/images/category/ctg-4.jpg')); ?>" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="<?php echo e(route('eacademy.courses')); ?>">
                                             <h5>Photography</h5>
                                             <span>17 courses </span>
                                         </a>
@@ -113,7 +113,7 @@
                                         <img src="<?php echo e(asset('backend/images/category/ctg-5.jpg')); ?>" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="<?php echo e(route('eacademy.courses')); ?>">
                                             <h5>Finance</h5>
                                             <span>103 courses </span>
                                         </a>
@@ -126,7 +126,7 @@
                                         <img src="<?php echo e(asset('backend/images/category/ctg-6.jpg')); ?>" alt="Category">
                                     </div>
                                     <div class="items-cont">
-                                        <a href="courses.php">
+                                        <a href="<?php echo e(route('eacademy.courses')); ?>">
                                             <h5>Science</h5>
                                             <span>17 courses </span>
                                         </a>
@@ -179,21 +179,22 @@
                 </div>
             </div> <!-- row -->
             <div class="row course-slied mt-30">
-                <div class="col-lg-4">
+                <?php $__currentLoopData = $courses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-4">
                     <div class="singel-course-2">
                         <div class="thum">
                             <div class="image">
-                                <img src="<?php echo e(asset('backend/images/course/cu-1.jpg')); ?>" alt="Course">
+                                <img src="<?php echo e(asset('uploads/' . $course->image)); ?>" alt="Course">
                             </div>
                             <div class="price">
-                                <span>Free</span>
+                                <span><?php echo e($course->is_paid ? 'Paid' : 'Free'); ?></span>
                             </div>
                             <div class="course-teacher">
                                 <div class="thum">
-                                    <a href="courses-singel.html"><img src="<?php echo e(asset('backend/images/course/teacher/t-1.jpg')); ?>" alt="teacher"></a>
+                                    <a href="courses-singel.html"><img src="<?php echo e(asset('uploads/' . $course->teacher->image)); ?>" alt="teacher"></a>
                                 </div>
                                 <div class="name">
-                                    <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
+                                    <a href="teachers-singel.php"><h6><?php echo e($course->teacher->name); ?></h6></a>
                                 </div>
                                 <div class="review">
                                     <ul>
@@ -207,138 +208,12 @@
                             </div>
                         </div>
                         <div class="cont">
-                            <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
+                            <a href="<?php echo e(route('eacademy.courses-single', $course)); ?>"><h4><?php echo e($course->title); ?></h4></a>
                         </div>
                     </div> <!-- singel course -->
                 </div>
-                <div class="col-lg-4">
-                    <div class="singel-course-2">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="<?php echo e(asset('backend/images/course/cu-2.jpg')); ?>" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="courses-singel.html"><img src="<?php echo e(asset('backend/images/course/teacher/t-2.jpg')); ?>" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="review">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> <!-- singel course -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="singel-course-2">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="<?php echo e(asset('backend/images/course/cu-3.jpg')); ?>" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="courses-singel.html"><img src="<?php echo e(asset('backend/images/course/teacher/t-3.jpg')); ?>" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="review">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> <!-- singel course -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="singel-course-2">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="<?php echo e(asset('backend/images/course/cu-4.jpg')); ?>" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="courses-singel.html"><img src="<?php echo e(asset('backend/images/course/teacher/t-4.jpg')); ?>" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="review">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> <!-- singel course -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="singel-course-2">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="<?php echo e(asset('backend/images/course/cu-5.jpg')); ?>" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="courses-singel.html"><img src="<?php echo e(asset('backend/images/course/teacher/t-5.jpg')); ?>" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="teachers-singel.php"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="review">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <a href="courses-singel.php"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> <!-- singel course -->
-                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                
             </div> <!-- course slied -->
         </div> <!-- container -->
     </section>
@@ -347,36 +222,28 @@
 
     <!--====== COUNTER PART START ======-->
 
-    <div id="counter-part" class="bg_cover pt-65 pb-110" data-overlay="8" style="background-image: url(<?php echo e(asset('backend/images/bg-2.jpg')); ?>)">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">30,000</span>+</span>
-                        <p>Students enrolled</p>
-                    </div> <!-- singel counter -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">41,000</span>+</span>
-                        <p>Courses Uploaded</p>
-                    </div> <!-- singel counter -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">11,000</span>+</span>
-                        <p>People certifie</p>
-                    </div> <!-- singel counter -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">39,000</span>+</span>
-                        <p>Global Teachers</p>
-                    </div> <!-- singel counter -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div>
+    <?php if (isset($component)) { $__componentOriginal3794f0472dc90784c51dc659162cf097 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal3794f0472dc90784c51dc659162cf097 = $attributes; } ?>
+<?php $component = App\View\Components\CounterPart::resolve(['coursesCount' => $coursesCount,'people' => $people,'studentsCount' => $studentsCount,'teachersCount' => $teachersCount] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('counter-part'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\CounterPart::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal3794f0472dc90784c51dc659162cf097)): ?>
+<?php $attributes = $__attributesOriginal3794f0472dc90784c51dc659162cf097; ?>
+<?php unset($__attributesOriginal3794f0472dc90784c51dc659162cf097); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal3794f0472dc90784c51dc659162cf097)): ?>
+<?php $component = $__componentOriginal3794f0472dc90784c51dc659162cf097; ?>
+<?php unset($__componentOriginal3794f0472dc90784c51dc659162cf097); ?>
+<?php endif; ?>
+
+    
 
     <!--====== COUNTER PART ENDS ======-->
 

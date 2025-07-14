@@ -31,11 +31,13 @@
   <!-- summernote -->
   <link rel="stylesheet"href="<?php echo e(asset('plugins/summernote/summernote-bs4.min.css')); ?>">
   <link rel="icon" href="<?php echo e(asset('backend/images/favicon.png')); ?>" type="image/x-icon"/>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
 
 <div class="wrapper">
 
@@ -43,7 +45,6 @@
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="<?php echo e(asset('dist/img/AdminLTELogo.png')); ?>" alt="AdminLTELogo" height="60" width="60">
   </div>
-
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -60,6 +61,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
+
 
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
@@ -159,9 +161,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="<?php echo e(asset('dist/img/AdminLTELogo.png')); ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <a href="index3.html" class="brand-link" >
+      <img src="<?php echo e(asset('backend/images/logo-2.png')); ?>" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Dashboard</span>
     </a>
 
     <!-- Sidebar -->
@@ -172,7 +174,7 @@
           <img src="<?php echo e(asset('dist/img/user2-160x160.jpg')); ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo e(Auth::user()->name); ?></a>
         </div>
       </div>
 
@@ -250,7 +252,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.blogs.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Blog</p>
                 </a>
@@ -260,7 +262,7 @@
            </li>
 
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.tags.index') || request()->routeIs('dashboard.tags.create')) ? 'active' : ''); ?>">
               <i class="nav-icon fa-solid fa-tags"></i>
               <p>
                 Tags
@@ -269,13 +271,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.tags.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Tags</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.tags.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Tag</p>
                 </a>
@@ -286,7 +288,7 @@
            </li>
 
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.categories.index') || request()->routeIs('dashboard.categories.create')) ? 'active' : ''); ?>">
               <i class="nav-icon fa-solid fa-paste"></i>
               <p>
                 Categories
@@ -295,13 +297,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.categories.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Categories</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.categories.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Category</p>
                 </a>
@@ -313,7 +315,7 @@
 
            <hr style="border: 1px solid #fff; width: 80%;">
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.courses.index') || request()->routeIs('dashboard.courses.create')) ? 'active' : ''); ?>">
               <p>
                 Courses
                 <i class="right fas fa-angle-left"></i>
@@ -321,13 +323,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.courses.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Courses</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.courses.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Course</p>
                 </a>
@@ -338,21 +340,21 @@
            </li>
 
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.lectures.index') || request()->routeIs('dashboard.lectures.create')) ? 'active' : ''); ?>">
               <p>
-                lectures
+                Lectures
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.lectures.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All lectures</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.lectures.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add lecture</p>
                 </a>
@@ -388,7 +390,7 @@
            </li>
 
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.events.index') || request()->routeIs('dashboard.events.create')) ? 'active' : ''); ?>">
               <p>
                 Events
                 <i class="right fas fa-angle-left"></i>
@@ -396,13 +398,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.events.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Events</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.events.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Event</p>
                 </a>
@@ -517,7 +519,15 @@
 <script src="<?php echo e(asset('dist/js/demo.js')); ?>"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo e(asset('dist/js/pages/dashboard.js')); ?>"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tags').select2({
+            placeholder: "Choose Tags ",
+            width: '100%'
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -26,7 +26,9 @@
                                 </div>
 
                                  <div class="form-group col-md-6">
-                                    <x-form.input type="file" name="image" label="Image" class="form-control rounded-pill" value="{{ $teacher->image }}" />
+                                    <x-form.input type="file" name="image" label="Image" class="form-control rounded-pill" />
+                                    <img class="img-thumbnail mt-1" src="{{ asset('uploads/' . $teacher->image) }}" width="40" class="mt-2" style="border-radius: 50%">
+
                                 </div>
                             </div>
                             <div class="form-row">

@@ -12,7 +12,7 @@
                         <h2>About Us</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">About Us</li>
                             </ol>
                         </nav>
@@ -76,36 +76,26 @@
 
     <!--====== COUNTER PART START ======-->
 
-    <div id="counter-part" class="bg_cover pt-65 pb-110" data-overlay="8" style="background-image: url(<?php echo e(asset('backend/images/bg-2.jpg')); ?>)">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">30,000</span>+</span>
-                        <p>Students enrolled</p>
-                    </div> <!-- singel counter -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">41,000</span>+</span>
-                        <p>Courses Uploaded</p>
-                    </div> <!-- singel counter -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">11,000</span>+</span>
-                        <p>People certifie</p>
-                    </div> <!-- singel counter -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-counter text-center mt-40">
-                        <span><span class="counter">39,000</span>+</span>
-                        <p>Global Teachers</p>
-                    </div> <!-- singel counter -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div>
+    <?php if (isset($component)) { $__componentOriginal3794f0472dc90784c51dc659162cf097 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal3794f0472dc90784c51dc659162cf097 = $attributes; } ?>
+<?php $component = App\View\Components\CounterPart::resolve(['coursesCount' => $coursesCount,'people' => $people,'studentsCount' => $studentsCount,'teachersCount' => $teachersCount] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('counter-part'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\CounterPart::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal3794f0472dc90784c51dc659162cf097)): ?>
+<?php $attributes = $__attributesOriginal3794f0472dc90784c51dc659162cf097; ?>
+<?php unset($__attributesOriginal3794f0472dc90784c51dc659162cf097); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal3794f0472dc90784c51dc659162cf097)): ?>
+<?php $component = $__componentOriginal3794f0472dc90784c51dc659162cf097; ?>
+<?php unset($__componentOriginal3794f0472dc90784c51dc659162cf097); ?>
+<?php endif; ?>
 
     <!--====== COUNTER PART ENDS ======-->
 
@@ -121,96 +111,26 @@
                     </div> <!-- section title -->
                 </div>
             </div> <!-- row -->
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-1.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-2.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-3.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-4.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-5.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-6.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-7.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="singel-teachers mt-30 text-center">
-                        <div class="image">
-                            <img src="<?php echo e(asset('backend/images/teachers/t-8.jpg')); ?>" alt="Teachers">
-                        </div>
-                        <div class="cont">
-                            <a href="teachers-singel.php"><h6>Mark alen</h6></a>
-                            <span>Vice chencelor</span>
-                        </div>
-                    </div> <!-- singel teachers -->
-                </div>
-            </div> <!-- row -->
+            <?php if (isset($component)) { $__componentOriginal2af5c6777a2443bf02838cafcee8cd61 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal2af5c6777a2443bf02838cafcee8cd61 = $attributes; } ?>
+<?php $component = App\View\Components\TeacherGrid::resolve(['teachers' => $teachers] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('teacher-grid'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\TeacherGrid::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal2af5c6777a2443bf02838cafcee8cd61)): ?>
+<?php $attributes = $__attributesOriginal2af5c6777a2443bf02838cafcee8cd61; ?>
+<?php unset($__attributesOriginal2af5c6777a2443bf02838cafcee8cd61); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal2af5c6777a2443bf02838cafcee8cd61)): ?>
+<?php $component = $__componentOriginal2af5c6777a2443bf02838cafcee8cd61; ?>
+<?php unset($__componentOriginal2af5c6777a2443bf02838cafcee8cd61); ?>
+<?php endif; ?>
         </div> <!-- container -->
     </section>
 

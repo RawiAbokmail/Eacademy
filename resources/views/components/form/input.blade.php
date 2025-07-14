@@ -3,7 +3,8 @@
     'name' => '',
     'label',
     'placeholder' => '',
-    'value' => old('name')
+    'value' => old($name, $value ?? '')
+
 ])
 <div class="mb-3">
     @if(isset($label))
@@ -20,7 +21,7 @@
     {{-- for update image --}}
     @if($type == 'file' && $value)
         <div>
-            <img class="img-thumbnail mt-1" width="120" src="{{ asset($value) }}" alt="">
+            <img class="img-thumbnail mt-1" width="100" src="{{ asset('uploads/' . $value) }}" alt="">
         </div>
     @endif
 

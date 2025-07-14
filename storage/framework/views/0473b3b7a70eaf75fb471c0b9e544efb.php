@@ -6,7 +6,8 @@ $__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames(([
     'name',
     'label',
     'placeholder' => '',
-    'value' => old($name)
+    'value' => old($name, $value ?? '')
+
 ]));
 
 foreach ($attributes->all() as $__key => $__value) {
@@ -27,7 +28,8 @@ foreach (array_filter(([
     'name',
     'label',
     'placeholder' => '',
-    'value' => old($name)
+    'value' => old($name, $value ?? '')
+
 ]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
     $$__key = $$__key ?? $__value;
 }
