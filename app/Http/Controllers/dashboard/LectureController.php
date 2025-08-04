@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LectureRequest;
 use App\Models\Course;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LectureController extends Controller
 {
@@ -28,40 +30,85 @@ class LectureController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LectureRequest $request)
     {
-        //
+        $data = $request->except(['_token', 'video']);
+
+
+    if ($request->hasFile('video')) {
+        $path = $request->file('video')->store('uploads', 'custom');
+        $data['video'] = $path;
+    }
+
+        Lecture::create($data);
+
+        return redirect()
+        ->route('dashboard.lectures.index')
+        ->with('success', 'Lecture created successfully.')
+        ->with('type', 'success');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Lecture $lecture)
     {
-        //
+        return view('dashboard.lectures.show', compact('lecture'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Lecture $lecture)
     {
-        //
+        $courses = Course::all();
+        return view('dashboard.lectures.edit', compact('lecture', 'courses'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(LectureRequest $request, Lecture $lecture)
     {
-        //
+        $data = $request->except(['_token', 'video']);
+
+        if ($request->hasFile('video')) {
+            $videoName = basename($lecture->video);
+            $fullPath = public_path('uploads/uploads/' . $videoName);
+
+                if ($lecture->image && file_exists($fullPath)) {
+                 unlink($fullPath);
+                }
+            $path = $request->file('video')->store('uploads', 'custom');
+            $data['video'] = $path;
+        }
+
+        $lecture->update($data);
+
+        return redirect()
+            ->route('dashboard.lectures.index')
+            ->with('success', 'Lecture updated successfully.')
+            ->with('type', 'info');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Lecture $lecture)
     {
-        //
+        $videoName = basename($lecture->video);
+        $fullPath = public_path('uploads/uploads/' . $videoName);
+
+        if (file_exists($fullPath)) {
+             unlink($fullPath);
+        }
+
+        $lecture->delete();
+
+        return redirect()
+            ->route('dashboard.lectures.index')
+            ->with('success', 'Lecture deleted successfully.')
+            ->with('type', 'danger');
+
     }
 }

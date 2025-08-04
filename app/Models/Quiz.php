@@ -9,6 +9,11 @@ class Quiz extends Model
     //
     protected $guarded = [];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function course()
     {
         return $this->belongsTo(Course::class);
@@ -21,6 +26,11 @@ class Quiz extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'quiz_user')->withTimestamps();
-    }   
+        return $this->belongsToMany(User::class, 'quiz_user')->withTimestamps()->withPivot('score', 'submitted_at');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

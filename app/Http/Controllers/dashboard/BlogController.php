@@ -123,9 +123,14 @@ class BlogController extends Controller
 
         if ($request->hasFile('image')) {
              // Delete the old image if exists
-            if ($blog->image && file_exists(public_path($blog->image))) {
-                unlink(public_path($blog->image));
-            }
+
+            $imageName = basename($blog->image);
+            $fullPath = public_path('uploads/uploads/' . $imageName);
+
+                if (file_exists($fullPath)) {
+                 unlink($fullPath);
+                }
+
             $path = $request->file('image')->store('uploads', 'custom');
             $data['image'] = $path;
         }
@@ -148,9 +153,12 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        // Delete the image if exists
-        if ($blog->image && file_exists(public_path($blog->image))) {
-            unlink(public_path($blog->image));
+
+        $imageName = basename($blog->image); // فقط اسم الصورة بدون المسار
+        $fullPath = public_path('uploads/uploads/' . $imageName); // مجلد التخزين الحقيقي
+
+        if (file_exists($fullPath)) {
+             unlink($fullPath);
         }
 
         // Delete the blog

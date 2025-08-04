@@ -19,10 +19,17 @@
     @enderror
 
     {{-- for update image --}}
-    @if($type == 'file' && $value)
+    @if($type == 'file' && $value && $name == 'image')
         <div>
             <img class="img-thumbnail mt-1" width="100" src="{{ asset('uploads/' . $value) }}" alt="">
         </div>
+
+        @elseif($type == 'file' && $value && $name == 'video')
+
+        <div>
+            <video class="img-thumbnail mt-1" width="500" src="{{ asset('uploads/' . $value) }}" alt="" controls></video>
+        </div>
+
     @endif
 
 </div>

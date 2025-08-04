@@ -6,7 +6,7 @@
                             <img src="{{ asset('uploads/' . $teacher->image) }}" alt="Teachers">
                         </div>
                         <div class="cont">
-                            <a href="{{ route('eacademy.teachers-single', $teacher->id) }}"><h6>{{ $teacher->name }}</h6></a>
+                            <a href="{{ route('eacademy.teachers-single', $teacher)}}"><h6>{{ $teacher->name }}</h6></a>
                             <span>{{ $teacher->job }}</span>
                         </div>
                     </div> <!-- singel teachers -->

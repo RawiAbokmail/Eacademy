@@ -6,7 +6,7 @@
                             <img src="<?php echo e(asset('uploads/' . $teacher->image)); ?>" alt="Teachers">
                         </div>
                         <div class="cont">
-                            <a href="<?php echo e(route('eacademy.teachers-single', $teacher->id)); ?>"><h6><?php echo e($teacher->name); ?></h6></a>
+                            <a href="<?php echo e(route('eacademy.teachers-single', $teacher)); ?>"><h6><?php echo e($teacher->name); ?></h6></a>
                             <span><?php echo e($teacher->job); ?></span>
                         </div>
                     </div> <!-- singel teachers -->

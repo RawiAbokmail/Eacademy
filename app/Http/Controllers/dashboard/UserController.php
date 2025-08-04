@@ -13,11 +13,36 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $users = User::latest()->paginate(10);
-        return view('dashboard.users.index', compact('users'));
+    $search = trim($request->search);
+    $sort = $request->sort_by ?? 'null';
+
+    $users = User::query();
+
+    if ($search) {
+        $users->where(function ($q) use ($search) {
+            $q->where('name', 'like', '%' . $search . '%')
+              ->orWhere('email', 'like', '%' . $search . '%');
+        });
+    }
+
+    if (in_array($sort, ['student', 'teacher', 'admin'])) {
+    $users = $users->where('role', $sort);
+    } else {
+        $users->latest();
+    }
+
+    $users = $users->paginate(env('10'))->appends([
+        'search' => $search,
+        'sort_by' => $sort
+    ]);
+
+
+
+        // $users = User::latest()->paginate(10);
+        return view('dashboard.users.index', compact('users', 'search', 'sort'));
     }
 
     /**
@@ -50,6 +75,9 @@ class UserController extends Controller
         'job' => $request->job,
         'description' => $request->description,
         'bio' => $request->bio,
+        'about' => $request->about,
+        'achievements' => $request->achievements,
+        'objective' => $request->objective,
     ]);
 
         return redirect()
@@ -70,10 +98,6 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
 {
-    // $validated = $request->validate([
-    //     'name' => 'required|string|max:255',
-    //     'role' => 'required|in:admin,teacher,student',
-    // ]);
 
     $path = null;
 
@@ -81,12 +105,18 @@ class UserController extends Controller
 
     if ($request->hasFile('image')) {
              // Delete the old image if exists
-            if ($user->image && file_exists(public_path($user->image))) {
-                unlink(public_path($user->image));
-            }
+
+            $imageName = basename($user->image);
+            $fullPath = public_path('uploads/uploads/' . $imageName);
+
+                if ($user->image && file_exists($fullPath)) {
+                 unlink($fullPath);
+                }
+
             $path = $request->file('image')->store('uploads', 'custom');
+
         }else {
-            $path = $user->image; // Keep the old image if no new one is uploaded
+            $path = $user->image;
         }
 
     $user->update([
@@ -97,27 +127,34 @@ class UserController extends Controller
         'job' => $request->job,
         'description' => $request->description,
         'bio' => $request->bio,
+        'about' => $request->about,
+        'achievements' => $request->achievements,
+        'objective' => $request->objective,
     ]);
 
-    if($request->role == 'teacher'){
-        return redirect()
-        ->route('dashboard.teachers.index')
-        ->with('success', 'User updated successfully')
-        ->with('type', 'info');
-    }else{
+
          return redirect()
         ->route('dashboard.users.index')
         ->with('success', 'User updated successfully')
         ->with('type', 'info');
-    }
+
 
 }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
+        if ($request->hasFile('image')) {
+            $imageName = basename($user->image);
+            $fullPath = public_path('uploads/uploads/' . $imageName);
+
+            if (file_exists($fullPath)) {
+                unlink($fullPath);
+            }
+        }
+
         $user->delete();
 
         return redirect()

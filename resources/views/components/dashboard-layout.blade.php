@@ -33,6 +33,7 @@
   <link rel="icon" href="{{ asset('backend/images/favicon.png') }}" type="image/x-icon"/>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+@yield('styles')
 
 </head>
 
@@ -171,7 +172,14 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          {{-- <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image"> --}}
+        @if(auth()->user()->image)
+            <img src="{{ asset('uploads/' . auth()->user()->image) }}" alt="Avatar" class="img-circle elevation-2">
+        @else
+            <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=random" alt="Avatar" class="img-circle elevation-2">
+        @endif
+
+
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -210,7 +218,7 @@
             </ul>
           </li>
 
-           <li class="nav-item">
+           {{-- <li class="nav-item">
             <a href="#" class="nav-link {{ (request()->routeIs('dashboard.teachers.index') || request()->routeIs('dashboard.teachers.create')) ? 'active' : '' }}">
               <i class="fa-solid fa-chalkboard-user"></i>
               <p>
@@ -226,7 +234,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('dashboard.teachers.create') }}" class="nav-link">
+                <a href="{{ route('dashboard.users.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Teacher</p>
                 </a>
@@ -234,7 +242,7 @@
 
 
             </ul>
-           </li>
+           </li> --}}
 
           <li class="nav-item">
             <a href="#" class="nav-link {{ (request()->routeIs('dashboard.blogs.index') || request()->routeIs('dashboard.blogs.create')) ? 'active' : '' }}">
@@ -365,7 +373,7 @@
            </li>
 
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ (request()->routeIs('dashboard.quizzes.index') || request()->routeIs('dashboard.quizzes.create')) ? 'active' : '' }}">
               <p>
                 Quizzes
                 <i class="right fas fa-angle-left"></i>
@@ -373,13 +381,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{ route('dashboard.quizzes.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Quizzes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{ route('dashboard.quizzes.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Quiz</p>
                 </a>
@@ -519,6 +527,9 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+@yield('scripts')
 <script>
     $(document).ready(function() {
         $('#tags').select2({
@@ -526,6 +537,7 @@
             width: '100%'
         });
     });
+
 </script>
 
 </body>

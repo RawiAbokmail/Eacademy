@@ -16,8 +16,8 @@ class FrontController extends Controller
     function index()
     {
         $courses = Course::all();
-        $people = User::count() + Teacher::count();
-        $teachersCount = Teacher::count();
+        $people = User::count();
+        $teachersCount = User::where('role', 'teacher')->count();
         $studentsCount = User::where('role', 'student')->count();
         $coursesCount = Course::count();
         return view('eacademy.index', compact('courses', 'studentsCount', 'coursesCount', 'people', 'teachersCount'));
@@ -25,9 +25,9 @@ class FrontController extends Controller
 
     function about()
     {
-         $teachers = Teacher::latest()->paginate(8);
-        $people = User::count() + Teacher::count();
-        $teachersCount = Teacher::count();
+        $teachers = User::where('role', 'teacher')->latest()->paginate(8);
+        $people = User::count();
+        $teachersCount = User::where('role', 'teacher')->count();
         $studentsCount = User::where('role', 'student')->count();
         $coursesCount = Course::count();
         return view('eacademy.about', compact('studentsCount', 'coursesCount', 'people', 'teachersCount', 'teachers'));
@@ -66,12 +66,14 @@ class FrontController extends Controller
 
     function teachers()
     {
-        $teachers = Teacher::latest()->paginate(8);
+        $teachers = User::where('role', 'teacher')->latest()->paginate(8);
         return view('eacademy.teachers', compact('teachers'));
     }
 
-    function teachers_single(Teacher $teacher)
+
+    function teachers_single(User $teacher)
     {
+
         return view('eacademy.teachers-single', compact('teacher'));
     }
 

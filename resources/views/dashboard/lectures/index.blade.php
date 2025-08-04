@@ -22,7 +22,7 @@
                 <th>Video</th>
                 <th>Time</th>
                 <th>Description</th>
-                <th>Course_id</th>
+                <th>Course_title</th>
                 <th>Created at</th>
                 <th>Actions</th>
             </tr>
@@ -33,20 +33,23 @@
                     <td>{{ $lecture->id }}</td>
                     <td>{{ $lecture->name }}</td>
                     <td>
-                        @if ($lecture->image)
-                            <img src="{{ asset('uploads/' . $lecture->image) }}" width="80">
+                        @if ($lecture->video)
+                            <a href="{{ asset('uploads/' . $lecture->video) }}" target="_blank">show Video</a>
                         @else
                             N/A
                         @endif
                     </td>
                     <td>{{ $lecture->time }}</td>
-                    <td>${{ $lecture->description }}</td>
-                    <td>${{ $lecture->course->id }}</td>
-                    <td>${{ $lecture->created_at }}</td>
+                    <td>{{ $lecture->description }}</td>
+                    <td>{{ $lecture->course->title }}</td>
+                    <td>{{ $lecture->created_at }}</td>
 
                     <td>
-                        <a href="{{ route('dashboard.lectures.edit', $lecture) }}" class="btn btn-sm btn-info">Edit</a>
-                        <form action="{{ route('dashboard.lectures.destroy', $lecture) }}" method="POST" class="d-inline"
+                        <a href="{{ route('dashboard.lectures.show', $lecture->id) }}" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-eye me-1"></i>
+                        </a>
+                        <a href="{{ route('dashboard.lectures.edit', $lecture->id) }}" class="btn btn-sm btn-info">Edit</a>
+                        <form action="{{ route('dashboard.lectures.destroy', $lecture->id) }}" method="POST" class="d-inline"
                               onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')
@@ -56,7 +59,7 @@
                 </tr>
                  @empty
                 <tr>
-                 <td class="text-center align-middle" colspan="7">No data entered</td>
+                 <td class="text-center align-middle" colspan="8">No data entered</td>
                 </tr>
              @endforelse
 

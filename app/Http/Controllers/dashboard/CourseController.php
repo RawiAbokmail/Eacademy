@@ -113,9 +113,14 @@ class CourseController extends Controller
 
         if ($request->hasFile('image')) {
              // Delete the old image if exists
-            if ($course->image && file_exists(public_path($course->image))) {
-                unlink(public_path($course->image));
-            }
+
+            $imageName = basename($course->image);
+            $fullPath = public_path('uploads/uploads/' . $imageName);
+
+                if ($course->image && file_exists($fullPath)) {
+                    unlink($fullPath);
+                }
+           
             $path = $request->file('image')->store('uploads', 'custom');
             $data['image'] = $path;
         }
@@ -136,8 +141,11 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         // 1. Delete the course
-        if ($course->image && file_exists(public_path($course->image))) {
-            unlink(public_path($course->image));
+        $imageName = basename($course->image);
+        $fullPath = public_path('uploads/uploads/' . $imageName);
+
+        if (file_exists($fullPath)) {
+             unlink($fullPath);
         }
         $course->delete();
 

@@ -34,7 +34,7 @@
 
                                 <div class="form-group col-md-6">
                                     <x-form.select name="category_id" label="Choose Category" class="form-control rounded-pill">
-                                        <option value="">--  Choose Category  --</option>
+                                        <option value="" disabled>--  Choose Category  --</option>
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
                                     {{ old('category_id', $blog->category_id ?? '') == $category->id ? 'selected' : '' }}>
@@ -59,7 +59,7 @@
 
 
                                 <div class="form-group col-md-12">
-                                    <x-form.textarea name="content" label="Content" class="form-control rounded-pill" placeholder="type your content here.." />
+                                    <x-form.textarea name="content"  label="Content" class="form-control rounded-pill" placeholder="type your content here.." />
                                 </div>
 
 
@@ -76,5 +76,17 @@
         </div>
     </div>
 
+ @section('scripts')
+
+<script src="https://cdn.tiny.cloud/1/katzkefytv231v6h875786xbevx11dx1nl9admloyrfxdvt7/6/tinymce.min.js"></script>
+    <script>
+            tiny.init({
+                selector: '#editor',
+                height: 400,
+                plugins: 'link image code lists',
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+            });
+</script>
+@endsection
 
 </x-dashboard-layout>

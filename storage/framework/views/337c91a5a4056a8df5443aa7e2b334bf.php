@@ -33,6 +33,7 @@
   <link rel="icon" href="<?php echo e(asset('backend/images/favicon.png')); ?>" type="image/x-icon"/>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+<?php echo $__env->yieldContent('styles'); ?>
 
 </head>
 
@@ -171,7 +172,14 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?php echo e(asset('dist/img/user2-160x160.jpg')); ?>" class="img-circle elevation-2" alt="User Image">
+          
+        <?php if(auth()->user()->image): ?>
+            <img src="<?php echo e(asset('uploads/' . auth()->user()->image)); ?>" alt="Avatar" class="img-circle elevation-2">
+        <?php else: ?>
+            <img src="https://ui-avatars.com/api/?name=<?php echo e(urlencode(auth()->user()->name)); ?>&background=random" alt="Avatar" class="img-circle elevation-2">
+        <?php endif; ?>
+
+
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo e(Auth::user()->name); ?></a>
@@ -210,31 +218,7 @@
             </ul>
           </li>
 
-           <li class="nav-item">
-            <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.teachers.index') || request()->routeIs('dashboard.teachers.create')) ? 'active' : ''); ?>">
-              <i class="fa-solid fa-chalkboard-user"></i>
-              <p>
-                Teachers
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo e(route('dashboard.teachers.index')); ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Teachers</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo e(route('dashboard.teachers.create')); ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Teacher</p>
-                </a>
-              </li>
-
-
-            </ul>
-           </li>
+           
 
           <li class="nav-item">
             <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.blogs.index') || request()->routeIs('dashboard.blogs.create')) ? 'active' : ''); ?>">
@@ -365,7 +349,7 @@
            </li>
 
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php echo e((request()->routeIs('dashboard.quizzes.index') || request()->routeIs('dashboard.quizzes.create')) ? 'active' : ''); ?>">
               <p>
                 Quizzes
                 <i class="right fas fa-angle-left"></i>
@@ -373,13 +357,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.quizzes.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Quizzes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?php echo e(route('dashboard.quizzes.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Quiz</p>
                 </a>
@@ -520,6 +504,9 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo e(asset('dist/js/pages/dashboard.js')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<?php echo $__env->yieldContent('scripts'); ?>
 <script>
     $(document).ready(function() {
         $('#tags').select2({
@@ -527,6 +514,7 @@
             width: '100%'
         });
     });
+
 </script>
 
 </body>

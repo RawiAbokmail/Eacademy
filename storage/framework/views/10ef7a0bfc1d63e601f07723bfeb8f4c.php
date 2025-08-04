@@ -28,11 +28,12 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Teacher</th>
-                <th>Price</th>
-                <th>Image</th>
+                <th>Name</th>
+                <th>Video</th>
+                <th>Time</th>
+                <th>Description</th>
+                <th>Course_title</th>
+                <th>Created at</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,20 +41,25 @@
             <?php $__empty_1 = true; $__currentLoopData = $lectures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lecture): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <tr>
                     <td><?php echo e($lecture->id); ?></td>
-                    <td><?php echo e($lecture->title); ?></td>
-                    <td><?php echo e($lecture->category->name); ?></td>
-                    <td><?php echo e($lecture->teacher->name); ?></td>
-                    <td>$<?php echo e($lecture->price); ?></td>
+                    <td><?php echo e($lecture->name); ?></td>
                     <td>
-                        <?php if($lecture->image): ?>
-                            <img src="<?php echo e(asset('uploads/' . $lecture->image)); ?>" width="80">
+                        <?php if($lecture->video): ?>
+                            <a href="<?php echo e(asset('uploads/' . $lecture->video)); ?>" target="_blank">show Video</a>
                         <?php else: ?>
                             N/A
                         <?php endif; ?>
                     </td>
+                    <td><?php echo e($lecture->time); ?></td>
+                    <td><?php echo e($lecture->description); ?></td>
+                    <td><?php echo e($lecture->course->title); ?></td>
+                    <td><?php echo e($lecture->created_at); ?></td>
+
                     <td>
-                        <a href="<?php echo e(route('dashboard.lectures.edit', $lecture)); ?>" class="btn btn-sm btn-info">Edit</a>
-                        <form action="<?php echo e(route('dashboard.lectures.destroy', $lecture)); ?>" method="POST" class="d-inline"
+                        <a href="<?php echo e(route('dashboard.lectures.show', $lecture->id)); ?>" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-eye me-1"></i>
+                        </a>
+                        <a href="<?php echo e(route('dashboard.lectures.edit', $lecture->id)); ?>" class="btn btn-sm btn-info">Edit</a>
+                        <form action="<?php echo e(route('dashboard.lectures.destroy', $lecture->id)); ?>" method="POST" class="d-inline"
                               onsubmit="return confirm('Are you sure?')">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
@@ -63,7 +69,7 @@
                 </tr>
                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <tr>
-                 <td class="text-center align-middle" colspan="7">No data entered</td>
+                 <td class="text-center align-middle" colspan="8">No data entered</td>
                 </tr>
              <?php endif; ?>
 

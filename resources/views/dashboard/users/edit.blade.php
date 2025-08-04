@@ -58,8 +58,20 @@
                                 <div class="form-group col-md-12">
                                     <x-form.textarea name="bio" label="Bio" class="form-control rounded-pill" placeholder="type your bio here.." value="{{ $user->bio }}"/>
                                 </div>
+                            </div>
 
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <x-form.textarea name="about" label="About" class="form-control rounded-pill" placeholder="type your about here.." value="{{ $user->about }}" />
+                                </div>
 
+                                <div class="form-group col-md-12">
+                                    <x-form.textarea name="achievements" label="Achievements" class="form-control rounded-pill" placeholder="type your achievements here.." value="{{ $user->achievements }}" />
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <x-form.textarea name="objective" label="Objective" class="form-control rounded-pill" placeholder="type your objective here.." value="{{ $user->objective }}" />
+                                </div>
                             </div>
 
                             <div class="form-group text-right mt-4">

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Profile;
 
 class User extends Authenticatable
 {
@@ -22,10 +23,13 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'image',         
+        'image',
         'job',
         'description',
         'bio',
+        'about',
+        'achievements',
+        'objective',
         ];
 
     /**
@@ -63,6 +67,11 @@ class User extends Authenticatable
         return $this->role === 'student';
     }
 
+    public function profile()
+{
+    return $this->hasOne(Profile::class);
+}
+
     public function teacher(){
         return $this->hasOne(Teacher::class);
     }
@@ -89,6 +98,16 @@ class User extends Authenticatable
     }
 
     public function quizzes(){
-        return $this->belongsToMany(Quiz::class, 'quiz_user')->withTimestamps();
+        return $this->belongsToMany(Quiz::class, 'quiz_user')->withTimestamps()->withPivot('score', 'submitted_at');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function scopeStudents($query)
+    {
+        return $query->where('role', 'student');
     }
 }

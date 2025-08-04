@@ -26,9 +26,12 @@ class UserRequest extends FormRequest
         'email' => 'required|email|unique:users,email,' . ($this->user->id ?? 'NULL'),
         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         'role' => 'required|in:admin,teacher,student',
-        'job' => 'required_if:role,teacher|string|max:150',
-        'description' => 'required_if:role,teacher|string|max:500',
-        'bio' => 'required_if:role,teacher|string|max:500',
+        'job' => ['required_if:role,teacher'],
+        'description' => 'required_if:role,teacher',
+        'bio' => 'required_if:role,teacher',
+        'about' => 'required_if:role,teacher',
+        'achievements' => 'required_if:role,teacher',
+        'objective' => 'required_if:role,teacher',
     ];
 
          if ($this->isMethod('post')) {

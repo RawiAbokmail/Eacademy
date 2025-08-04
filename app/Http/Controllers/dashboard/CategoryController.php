@@ -113,9 +113,14 @@ class CategoryController extends Controller
         // 3. update data
         if ($request->hasFile('image')) {
             // Delete the old image if exists
-            if ($category->image && file_exists(public_path($category->image))) {
-                unlink(public_path($category->image));
-            }
+
+            $imageName = basename($category->image); // فقط اسم الصورة بدون المسار
+            $fullPath = public_path('uploads/uploads/' . $imageName); // مجلد التخزين الحقيقي
+
+                if ($category->image && file_exists($fullPath)) {
+                    unlink($fullPath);
+                }
+            
             $path = $request->file('image')->store('uploads', 'custom');
             $data['image'] = $path;
         }
@@ -131,8 +136,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if ($category->image && file_exists(public_path($category->image))) {
-            unlink(public_path($category->image));
+        $imageName = basename($category->image); // فقط اسم الصورة بدون المسار
+        $fullPath = public_path('uploads/uploads/' . $imageName); // مجلد التخزين الحقيقي
+
+        if (file_exists($fullPath)) {
+             unlink($fullPath);
         }
         $category->delete();
 

@@ -6,15 +6,17 @@ use App\Http\Controllers\dashboard\CourseController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\EventController;
 use App\Http\Controllers\dashboard\LectureController;
+use App\Http\Controllers\dashboard\QuestionController;
 use App\Http\Controllers\dashboard\TagController;
-use App\Http\Controllers\dashboard\TeacherController;
-use App\Http\Controllers\dashboard\TestController;
 use App\Http\Controllers\dashboard\UserController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\dashboard\QuizController;
+use App\Http\Controllers\QuizStartController;
 use App\Http\Middleware\CheckType;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\EnsureUserIsAdminOrTeacher;
+
+
 
 Route::prefix('/')->name('eacademy.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('index');
@@ -36,19 +38,29 @@ Route::prefix('/')->name('eacademy.')->group(function () {
 
 });
 
+    // Route::middleware(['auth'])->group(function () {
+    //     Route::get('quizzes/{quiz}/start', [QuizStartController::class, 'start'])->name('quizzes.start');
+    //     Route::post('quizzes/{quiz}/submit', [QuizStartController::class, 'submit'])->name('quizzes.submit');
+    // });
+
 
 
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', CheckType::class])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('users', UserController::class);
-    Route::resource('teachers', TeacherController::class)->except(['show']);
     Route::resource('blogs', BlogController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('courses', CourseController::class);
     Route::resource('lectures', LectureController::class);
     Route::resource('events', EventController::class);
+    Route::resource('quizzes', QuizController::class);
+    Route::resource('quizzes.questions', QuestionController::class);
+    Route::get('quizzes/{quiz}/results', [QuizController::class, 'results'])->name('quizzes.results');
+    Route::get('quizzes/{quiz}/results/{user}', [QuizController::class, 'showResults'])->name('quizzes.show-results');
+    Route::post('quizzes/{quiz}/submit', [QuizController::class, 'submit'])->name('quizzes.submit');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

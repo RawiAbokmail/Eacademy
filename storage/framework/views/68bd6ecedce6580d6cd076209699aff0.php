@@ -26,6 +26,37 @@
         <?php endif; ?>
 
         <div class="container p-2">
+            <div class="search-sort mb-3">
+                <form method="GET" action="<?php echo e(route('dashboard.users.index')); ?>" class="row g-2 align-items-center">
+                    <div class="col-md-6">
+                        <input
+                            type="text"
+                            name="search"
+                            value="<?php echo e(request('search')); ?>"
+                            class="form-control"
+                            placeholder="Search by name or email..."
+                            aria-label="Search Users"
+                        >
+                    </div>
+                    <div class="col-md-4">
+                        <select
+                            name="sort_by"
+                            class="form-select"
+                            aria-label="Filter by Role"
+                        >
+                            <option value="">All Roles</option>
+                            <option value="student" <?php echo e(request('sort_by') == 'student' ? 'selected' : ''); ?>>student</option>
+                            <option value="teacher" <?php echo e(request('sort_by') == 'teacher' ? 'selected' : ''); ?>>Teacher</option>
+                            <option value="admin" <?php echo e(request('sort_by') == 'admin' ? 'selected' : ''); ?>>Admin</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-grid">
+                        <button type="submit" class="btn btn-dark">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
             <table class="table">
   <thead>
     <tr class="table-info">

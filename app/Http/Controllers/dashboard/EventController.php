@@ -103,9 +103,14 @@ class EventController extends Controller
 
         if ($request->hasFile('image')) {
              // Delete the old image if exists
-            if ($event->image && file_exists(public_path($event->image))) {
-                unlink(public_path($event->image));
-            }
+
+            $imageName = basename($event->image);
+            $fullPath = public_path('uploads/uploads/' . $imageName);
+
+                if ($event->image && file_exists($fullPath)) {
+                unlink($fullPath);
+                }
+            
             $path = $request->file('image')->store('uploads', 'custom');
             $data['image'] = $path;
         }
@@ -123,8 +128,11 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-         if ($event->image && file_exists(public_path($event->image))) {
-            unlink(public_path($event->image));
+        $imageName = basename($event->image);
+        $fullPath = public_path('uploads/uploads/' . $imageName);
+
+        if (file_exists($fullPath)) {
+             unlink($fullPath);
         }
 
         $event->delete();

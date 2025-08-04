@@ -10,7 +10,7 @@
     @if(isset($label))
     <label class="form-label">{{ $label }}</label>
     @endif
-    <textarea rows="{{ $rows }}" class="form-control @error($name) is-invalid @enderror" name="{{ $name }}" placeholder="{{ $placeholder }}" >{{ $value }}</textarea>
+    <textarea rows="{{ $rows }}" id="editor" class="form-control @error($name) is-invalid @enderror" name="{{ $name }}" placeholder="{{ $placeholder }}" >{{ $value }}</textarea>
      @error($name)
         <small class="invalid-feedback">
             {{ $message }}
