@@ -96,7 +96,6 @@
                     <div class="col-lg-4">
                         <div class="header-social text-lg-right text-center">
                             <ul>
-                                
 
                                 <li class="nav-item">
                                      <?php if(auth()->guard()->guest()): ?>
@@ -113,6 +112,12 @@
                                         <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
                                                 <?php echo csrf_field(); ?>
                                         </form>
+
+                                        <?php if(auth()->user()->role === 'admin'): ?>
+                                            <a href="<?php echo e(route('dashboard.index')); ?>" class="btn btn-sm btn-primary" style="color: #fff; margin-left: 10px;" target="_blank">
+                                                Dashboard
+                                            </a>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </li>
 

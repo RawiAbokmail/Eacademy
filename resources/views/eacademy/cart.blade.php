@@ -24,55 +24,22 @@
                             <th class="pro-remove">Remove</th>
                         </tr>
                         </thead>
+
                         <tbody>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                                <img class="img-fluid" src="{{ asset('backend/images/publication/p-1.jpg') }}"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Zeon Zen 4 Pro</a></td>
-                            <td class="pro-price"><span>$295.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="1"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$295.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                                <img class="img-fluid" src="{{ asset('backend/images/publication/p-2.jpg') }}"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Aquet Drone D 420</a></td>
-                            <td class="pro-price"><span>$275.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="2"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$550.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                            <img class="img-fluid" src="{{ asset('backend/images/publication/p-3.jpg') }}"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Game Station X 22</a></td>
-                            <td class="pro-price"><span>$295.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="1"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$295.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                            <img class="img-fluid" src="{{ asset('backend/images/publication/p-4.jpg') }}"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Roxxe Headphone Z 75 </a></td>
-                            <td class="pro-price"><span>$110.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="1"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$110.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
+                            @foreach($cart as $id => $item)
+                            <tr>
+
+                                <td class="pro-thumbnail"><img src="{{ asset('products/' . $item['image']) }}" width="100" alt="Product"></td>
+                                <td class="pro-title">{{ data_get($item, 'title') }}</td>
+                                {{-- <td class="pro-title">{{ $item['title'] }}</td> --}}
+                                <td class="pro-price">${{ $item['price'] }}</td>
+                                <td class="pro-quantity">
+                                    <input type="number" value="{{ $item['quantity'] }}" min="1">
+                                </td>
+                                <td class="pro-subtotal">${{ $item['price'] * $item['quantity'] }}</td>
+                                <td class="pro-remove"><a href="{{ route('eacademy.cart.remove', $id) }}"><i class="fa fa-trash-o"></i></a></td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -98,26 +65,37 @@
                 <div class="cart-calculator-wrapper">
                     <div class="cart-calculate-items">
                         <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th colspan="2">Cart Totals</th>
-                                </tr>
-                                <tr>
-                                    <td>Sub Total</td>
-                                    <td>$230</td>
-                                </tr>
-                                <tr>
-                                    <td>Shipping</td>
-                                    <td>$70</td>
-                                </tr>
-                                <tr>
-                                    <td>Total</td>
-                                    <td class="total-amount">$300</td>
-                                </tr>
-                            </table>
+                            @php
+                                $cart = session('cart', []);
+                                $subTotal = array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cart));
+                                $shipping = $subTotal > 0 ? 70 : 0; // إذا السلة فارغة، الشحن 0
+                                $total = $subTotal + $shipping;
+                            @endphp
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">Cart Totals</th>
+                            </tr>
+                            <tr>
+                                <td>Sub Total</td>
+                                <td>${{ number_format($subTotal, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td>${{ number_format($shipping, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td class="total-amount">${{ number_format($total, 2) }}</td>
+                            </tr>
+                        </table>
                         </div>
                     </div>
-                    <a href="checkout.php" class="btn-add-to-cart">Proceed To Checkout</a>
+                    <form action="{{ route('eacademy.checkout') }}" method="GET">
+                    @csrf
+                    <button type="submit" class="btn-add-to-cart">Proceed To Checkout</button>
+                </form>
+
                 </div>
             </div>
         </div>

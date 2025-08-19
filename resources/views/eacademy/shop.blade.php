@@ -60,187 +60,46 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="shop-grid" role="tabpanel" aria-labelledby="shop-grid-tab">
                     <div class="row justify-content-center">
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-1.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
+                        @foreach ($products as $product)
+                            <div class="col-lg-3 col-md-6 col-sm-8">
+                                <div class="singel-publication mt-30">
+                                    <div class="image">
+                                        <img src="{{ asset('products/' . $product->image) }}" alt="Publication">
+                                        <div class="add-cart">
+                                            <ul>
+                                                <li><a href="{{ route('eacademy.cart') }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Magazine</h6></a>
-                                        <span>$50.00</span>
+                                    <div class="cont">
+                                        <div class="name">
+                                            <a href="{{ route('eacademy.shop-single', $product) }}"><h6>{{ $product->title }}</h6></a>
+                                            <span>${{ $product->price }}</span>
+                                        </div>
+                                        <div class="button text-right">
+                                            <a href="{{ route('eacademy.cart.add', $product) }}" class="main-btn">Buy Now</a>
+                                        </div>
                                     </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-2.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Notebook </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-3.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Staionary set </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-4.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-5.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-6.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-7.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Magazine </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="{{ asset('backend/images/publication/p-8.jpg') }}" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
+                                </div> <!-- singel publication -->
+                            </div>
+
+                        @endforeach
+                        {{ $products->links() }}
+
                     </div> <!-- row -->
                 </div>
                 <div class="tab-pane fade" id="shop-list" role="tabpanel" aria-labelledby="shop-list-tab">
                     <div class="row">
+                        @foreach ($products as $product)
                         <div class="col-lg-6">
                             <div class="singel-publication mt-30">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="image">
-                                            <img src="{{ asset('backend/images/publication/p-1.jpg') }}" alt="Publication">
+                                            <img src="{{ asset('products/'. $product->image) }}" alt="Publication">
                                             <div class="add-cart">
                                                 <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="{{ route('eacademy.cart') }}"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -248,110 +107,22 @@
                                     <div class="col-sm-6">
                                         <div class="cont">
                                             <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
+                                                <a href="{{ route('eacademy.shop-single', $product) }}"><h6>{{ $product->title }}</h6></a>
+                                                <span>${{ $product->price }}</span>
                                             </div>
                                             <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
+                                                <p>{{ $product->description }}</p>
                                             </div>
                                             <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
+                                                <a href="{{ route('eacademy.cart') }}" class="main-btn">Buy Now</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div> <!-- row -->
                             </div> <!-- singel publication -->
                         </div>
-                        <div class="col-lg-6">
-                            <div class="singel-publication mt-30">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="image">
-                                            <img src="{{ asset('backend/images/publication/p-2.jpg') }}" alt="Publication">
-                                            <div class="add-cart">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="cont">
-                                            <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
-                                            </div>
-                                            <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
-                                            </div>
-                                            <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- row -->
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="singel-publication mt-30">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="image">
-                                            <img src="{{ asset('backend/images/publication/p-3.jpg') }}" alt="Publication">
-                                            <div class="add-cart">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="cont">
-                                            <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
-                                            </div>
-                                            <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
-                                            </div>
-                                            <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- row -->
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="singel-publication mt-30">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="image">
-                                            <img src="{{ asset('backend/images/publication/p-4.jpg') }}" alt="Publication">
-                                            <div class="add-cart">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="cont">
-                                            <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
-                                            </div>
-                                            <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
-                                            </div>
-                                            <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- row -->
-                            </div> <!-- singel publication -->
-                        </div>
+                        @endforeach
+
                     </div> <!-- row -->
                 </div>
             </div> <!-- tab content -->

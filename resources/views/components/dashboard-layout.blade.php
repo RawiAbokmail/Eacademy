@@ -423,7 +423,7 @@
            </li>
 
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ (request()->routeIs('dashboard.products.index') || request()->routeIs('dashboard.products.create')) ? 'active' : '' }}">
               <p>
                 Products
                 <i class="right fas fa-angle-left"></i>
@@ -431,13 +431,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{ route('dashboard.products.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Products</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{ route('dashboard.products.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Product</p>
                 </a>

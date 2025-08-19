@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Event;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Teacher;
 use App\Models\User;
@@ -43,14 +47,15 @@ class FrontController extends Controller
     {
         $teachers = Teacher::all();
         $categories = Category::all();
+        $lectures = $course->lectures()->latest()->get();
 
         $relatedCourses = Course::where('category_id', $course->category_id)
             ->where('id', '!=', $course->id)
             ->latest()
-            ->take(2)
+            ->take(3)
             ->get();
 
-        return view('eacademy.courses-single', compact('course', 'teachers', 'categories', 'relatedCourses'));
+        return view('eacademy.courses-single', compact('course', 'teachers', 'categories', 'relatedCourses', 'lectures'));
     }
 
     function events()
@@ -114,12 +119,18 @@ class FrontController extends Controller
 
     function shop()
     {
-        return view('eacademy.shop');
+        $products = Product::latest()->paginate(8);
+        return view('eacademy.shop', compact('products'));
     }
 
-    function shop_single()
+    function shop_single(Product $product)
     {
-        return view('eacademy.shop-single');
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->latest()
+            ->take(3)
+            ->get();
+        return view('eacademy.shop-single', compact('product', 'relatedProducts'));
     }
 
     function contact()
@@ -129,12 +140,62 @@ class FrontController extends Controller
 
     function cart()
     {
-        return view('eacademy.cart');
+        $cart = session()->get('cart', []);
+        if (empty($cart)) {
+            return redirect()->route('eacademy.shop')->with('info', 'Your cart is empty!');
+        }
+        return view('eacademy.cart', compact('cart'));
     }
 
-    function checkout()
+    function addToCart(Request $request, Product $product)
     {
-        return view('eacademy.checkout');
+        // Logic to add product to cart
+        $cart = session()->get('cart', []);
+        $quantity = max(1, (int) $request->input('quantity', 1));
+        if (isset($cart[$product->slug])) {
+            $cart[$product->slug]['quantity']+= $quantity;
+        } else {
+            $cart[$product->slug] = [
+                "title" => $product->title,
+                "quantity" => $quantity,
+                "price" => $product->price,
+                "image" => $product->image,
+            ];
+        }
+
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('eacademy.cart')->with('success', 'Product added to cart successfully!');
     }
+
+    function removeFromCart(Product $product)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$product->slug])) {
+            unset($cart[$product->slug]);
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->route('eacademy.cart')->with('success', 'Product removed from cart successfully!');
+    }
+
+
+    function checkout(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        if (empty($cart)) {
+            return redirect()->route('eacademy.shop')->with('info', 'Your cart is empty!');
+        }
+         $subTotal = array_sum(array_map(fn($i) => $i['price'] * $i['quantity'], $cart));
+        $shipping = $subTotal > 0 ? 70 : 0;
+        $total    = $subTotal + $shipping;
+
+        return view('eacademy.checkout', compact('cart', 'subTotal', 'shipping', 'total'));
+    }
+
+
+
+
 
 }

@@ -81,42 +81,44 @@
             </div>
         </div>
 
-        <div class="row">
+       <form action="{{ route('eacademy.checkout.process') }}" method="POST">
+        @csrf
+         <div class="row">
             <!-- Checkout Billing Details -->
             <div class="col-lg-6">
                 <div class="checkout-billing-details-wrap">
                     <h2>Billing Details</h2>
                     <div class="billing-form-wrap">
-                        <form action="#">
+                        <div >
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="single-input-item">
                                         <label for="f_name" class="required">First Name</label>
-                                        <input type="text" id="f_name" placeholder="First Name"/>
+                                        <input name="first_name" type="text" id="f_name" placeholder="First Name"/>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="single-input-item">
                                         <label for="l_name" class="required">Last Name</label>
-                                        <input type="text" id="l_name" placeholder="Last Name"/>
+                                        <input name="last_name" type="text" id="l_name" placeholder="Last Name"/>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="single-input-item">
                                 <label for="email" class="required">Email Address</label>
-                                <input type="email" id="email" placeholder="Email Address"/>
+                                <input name="email" type="email" id="email" placeholder="Email Address"/>
                             </div>
 
                             <div class="single-input-item">
                                 <label for="com-name">Company Name</label>
-                                <input type="text" id="com-name" placeholder="Company Name"/>
+                                <input name="company_name" type="text" id="com-name" placeholder="Company Name"/>
                             </div>
 
                             <div class="single-input-item">
                                 <label for="country" class="required">Country</label>
-                                <select name="country" id="country">
+                                <select name="country" name="country" id="country">
                                     <option value="Bangladesh">Bangladesh</option>
                                     <option value="India">India</option>
                                     <option value="Pakistan">Pakistan</option>
@@ -129,34 +131,34 @@
 
                             <div class="single-input-item">
                                 <label for="street-address" class="required">Street address</label>
-                                <input type="text" id="street-address" placeholder="Street address Line 1"/>
+                                <input name="street_address1" type="text" id="street-address" placeholder="Street address Line 1"/>
                             </div>
 
                             <div class="single-input-item">
-                                <input type="text" placeholder="Street address Line 2 (Optional)"/>
+                                <input name="street_address2" type="text" placeholder="Street address Line 2 (Optional)"/>
                             </div>
 
                             <div class="single-input-item">
                                 <label for="town" class="required">Town / City</label>
-                                <input type="text" id="town" placeholder="Town / City"/>
+                                <input name="town" type="text" id="town" placeholder="Town / City"/>
                             </div>
 
                             <div class="single-input-item">
                                 <label for="state">State / Divition</label>
-                                <input type="text" id="state" placeholder="State / Divition"/>
+                                <input name="state" type="text" id="state" placeholder="State / Divition"/>
                             </div>
 
                             <div class="single-input-item">
                                 <label for="postcode" class="required">Postcode / ZIP</label>
-                                <input type="text" id="postcode" placeholder="Postcode / ZIP"/>
+                                <input name="postcode" type="text" id="postcode" placeholder="Postcode / ZIP"/>
                             </div>
 
                             <div class="single-input-item">
                                 <label for="phone">Phone</label>
-                                <input type="text" id="phone" placeholder="Phone"/>
+                                <input name="phone" type="text" id="phone" placeholder="Phone"/>
                             </div>
 
-                            <div class="checkout-box-wrap">
+                            {{-- <div class="checkout-box-wrap">
                                 <div class="single-input-item">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="create_pwd">
@@ -171,9 +173,9 @@
                                         <input type="password" id="pwd" placeholder="Account Password"/>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="checkout-box-wrap">
+                            {{-- <div class="checkout-box-wrap">
                                 <div class="single-input-item">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="ship_to_different">
@@ -210,7 +212,7 @@
 
                                     <div class="single-input-item">
                                         <label for="country_2" class="required">Country</label>
-                                        <select name="country" id="country_2">
+                                        <select id="country_2">
                                             <option value="Bangladesh">Bangladesh</option>
                                             <option value="India">India</option>
                                             <option value="Pakistan">Pakistan</option>
@@ -245,161 +247,66 @@
                                         <input type="text" id="postcode_2" placeholder="Postcode / ZIP"/>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="single-input-item">
-                                <label for="ordernote">Order Note</label>
-                                <textarea name="ordernote" id="ordernote" cols="30" rows="3"
+                                <label for="order_note">Order Note</label>
+                                <textarea name="order_note" id="order_note" cols="30" rows="3"
                                           placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Order Summary Details -->
-            <div class="col-lg-6 mt-5 mt-lg-0">
-                <div class="order-summary-details">
+             <div class="col-lg-6 mt-5 mt-lg-0">
                     <h2>Your Order Summary</h2>
-                    <div class="order-summary-content">
-                        <!-- Order Summary Table -->
-                        <div class="order-summary-table table-responsive text-center">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Products</th>
-                                    <th>Total</th>
-                                </tr>
-                                </thead>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Products</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($cart as $item)
+                            <tr>
+                                <td>{{ data_get($item, 'title') }} <strong> × {{ data_get($item, 'quantity') }}</strong></td>
+                                <td>${{ $item['price'] * $item['quantity'] }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td>Total Amount</td>
+                            <td><strong>${{ $total }}</strong></td>
+                        </tr>
+                        </tfoot>
+                    </table>
 
-                                <tbody>
-                                <tr>
-                                    <td><a href="single-product.html">Suscipit Vestibulum <strong> × 1</strong></a></td>
-                                    <td>$165.00</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="single-product.html">Ami Vestibulum suscipit <strong> × 4</strong></a>
-                                    </td>
-                                    <td>$165.00</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="single-product.html">Vestibulum suscipit <strong> × 2</strong></a></td>
-                                    <td>$165.00</td>
-                                </tr>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td>Sub Total</td>
-                                    <td><strong>$400</strong></td>
-                                </tr>
+                    <!-- اختيار طريقة الدفع -->
+                    <label>
+                        <input type="radio" name="payment_method" value="cash" checked> Cash On Delivery
+                    </label>
+                    <label>
+                        <input type="radio" name="payment_method" value="paypal"> PayPal
+                    </label>
 
-                                <tr>
-                                    <td>Shipping</td>
-                                    <td class="d-flex justify-content-center">
-                                        <ul class="shipping-type">
-                                            <li>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="flatrate" name="shipping"
-                                                           class="custom-control-input" checked/>
-                                                    <label class="custom-control-label" for="flatrate">Flat Rate:
-                                                        $70.00</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="freeshipping" name="shipping"
-                                                           class="custom-control-input"/>
-                                                    <label class="custom-control-label" for="freeshipping">Free
-                                                        Shipping</label>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Total Amount</td>
-                                    <td><strong>$470</strong></td>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-
-                        <!-- Order Payment Method -->
-                        <div class="order-payment-method">
-                            <div class="single-payment-method show">
-                                <div class="payment-method-name">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="cashon" name="paymentmethod" value="cash"
-                                               class="custom-control-input" checked/>
-                                        <label class="custom-control-label" for="cashon">Cash On Delivery</label>
-                                    </div>
-                                </div>
-                                <div class="payment-method-details" data-method="cash">
-                                    <p>Pay with cash upon delivery.</p>
-                                </div>
-                            </div>
-
-                            <div class="single-payment-method">
-                                <div class="payment-method-name">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="directbank" name="paymentmethod" value="bank"
-                                               class="custom-control-input"/>
-                                        <label class="custom-control-label" for="directbank">Direct Bank
-                                            Transfer</label>
-                                    </div>
-                                </div>
-                                <div class="payment-method-details" data-method="bank">
-                                    <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                        payment reference. Your order will not be shipped until the funds have cleared
-                                        in our account..</p>
-                                </div>
-                            </div>
-
-                            <div class="single-payment-method">
-                                <div class="payment-method-name">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="checkpayment" name="paymentmethod" value="check"
-                                               class="custom-control-input"/>
-                                        <label class="custom-control-label" for="checkpayment">Pay with Check</label>
-                                    </div>
-                                </div>
-                                <div class="payment-method-details" data-method="check">
-                                    <p>Please send a check to Store Name, Store Street, Store Town, Store State /
-                                        County, Store Postcode.</p>
-                                </div>
-                            </div>
-
-                            <div class="single-payment-method">
-                                <div class="payment-method-name">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="paypalpayment" name="paymentmethod" value="paypal"
-                                               class="custom-control-input"/>
-                                        <label class="custom-control-label" for="paypalpayment">Paypal <img
-                                                src="{{ asset('backend/assets/img/paypal-card.jpg') }}" class="img-fluid paypal-card"
-                                                alt="Paypal"/></label>
-                                    </div>
-                                </div>
-                                <div class="payment-method-details" data-method="paypal">
-                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
-                                        account.</p>
-                                </div>
-                            </div>
-
-                            <div class="summary-footer-area">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="terms" required/>
-                                    <label class="custom-control-label" for="terms">I have read and agree to the website
-                                        <a
-                                                href="index.html">terms and conditions.</a></label>
-                                </div>
-
-                                <a href="#" class="btn-add-to-cart"> Place Order</a>
-                            </div>
-                        </div>
+                    <!-- الشروط -->
+                    <div class="custom-control custom-checkbox mt-3">
+                        <input type="checkbox" class="custom-control-input" id="terms" required>
+                        <label class="custom-control-label" for="terms">
+                            I have read and agree to the website <a href="#">terms and conditions</a>.
+                        </label>
                     </div>
+
+                    <!-- زر إتمام الطلب -->
+                    <button type="submit" class="btn btn-primary mt-3">Place Order</button>
                 </div>
-            </div>
         </div>
+        <button class="btn btn-success p-3">Complete Order</button>
+       </form>
         <!--== Checkout Page Content End ==-->
     </div>
 </div>

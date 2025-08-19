@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\dashboard\BlogController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\CourseController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\EventController;
 use App\Http\Controllers\dashboard\LectureController;
+use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\dashboard\QuestionController;
 use App\Http\Controllers\dashboard\TagController;
 use App\Http\Controllers\dashboard\UserController;
@@ -31,17 +33,16 @@ Route::prefix('/')->name('eacademy.')->group(function () {
 
     Route::get('/blog-single/{blog}', [FrontController::class, 'blog_single'])->name('blog-single');
     Route::get('/shop', [FrontController::class, 'shop'])->name('shop');
-    Route::get('/shop-single', [FrontController::class, 'shop_single'])->name('shop-single');
+    Route::get('/shop-single/{product}', [FrontController::class, 'shop_single'])->name('shop-single');
     Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
     Route::get('/cart', [FrontController::class, 'cart'])->name('cart');
     Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
+    Route::get('cart/add/{product}', [FrontController::class, 'addToCart'])->name('cart.add');
+    Route::get('cart/remove/{product}', [FrontController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 
 });
-
-    // Route::middleware(['auth'])->group(function () {
-    //     Route::get('quizzes/{quiz}/start', [QuizStartController::class, 'start'])->name('quizzes.start');
-    //     Route::post('quizzes/{quiz}/submit', [QuizStartController::class, 'submit'])->name('quizzes.submit');
-    // });
 
 
 
@@ -59,6 +60,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', CheckType::c
     Route::get('quizzes/{quiz}/results', [QuizController::class, 'results'])->name('quizzes.results');
     Route::get('quizzes/{quiz}/results/{user}', [QuizController::class, 'showResults'])->name('quizzes.show-results');
     Route::post('quizzes/{quiz}/submit', [QuizController::class, 'submit'])->name('quizzes.submit');
+    Route::resource('products', ProductController::class);
 });
 
 

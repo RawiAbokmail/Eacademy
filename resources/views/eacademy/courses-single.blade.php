@@ -121,26 +121,38 @@
                                             <h6>Learn basis javascirpt Lecture Started</h6>
                                         </div>
                                         <div class="accordion" id="accordionExample">
-                                            <div class="card">
+
+                                           @foreach ($lectures as $lecture)
+                                                     <div class="card">
                                                 <div class="card-header" id="headingOne">
                                                     <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                         <ul>
                                                             <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.1</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
+                                                            <li><span class="lecture">{{ $lecture->name }}</span></li>
+                                                            {{-- <li><span class="head">What is javascirpt</span></li> --}}
+                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span>{{ $lecture->time }}</span></span></li>
+
                                                         </ul>
                                                     </a>
                                                 </div>
 
                                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
+                                                        <p>{{ $lecture->description }}</p>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="card">
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                    <video width="100%" height="auto" controls>
+                                                        <source src="{{ asset('uploads/' . $lecture->video) }}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                           @endforeach
+
+
+                                            {{-- <div class="card">
                                                 <div class="card-header" id="headingTow">
                                                     <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapseTow" aria-expanded="true" aria-controls="collapseTow">
                                                         <ul>
@@ -247,7 +259,7 @@
                                                         <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div> <!-- curriculam cont -->
                                 </div>
@@ -420,14 +432,14 @@
                                     <li><i class="fa fa-user-o"></i>Students :  <span>100</span></li>
                                 </ul>
                                 <div class="price-button pt-10">
-                                    <span>Price : <b>$25</b></span>
+                                    <span>Price : <b>${{ $course->price }}</b></span>
                                     <a href="#" class="main-btn">Enroll Now</a>
                                 </div>
                             </div> <!-- course features -->
                         </div>
                         <div class="col-lg-12 col-md-6">
                             <div class="You-makelike mt-30">
-                                <h4>You make like </h4>
+                                <h4>You may like </h4>
                                 <div class="singel-makelike mt-20">
                                     <div class="image">
                                         <img src="{{ asset('backend/images/your-make/y-1.jpg') }}" alt="Image">

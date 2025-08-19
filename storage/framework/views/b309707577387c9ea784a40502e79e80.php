@@ -59,187 +59,47 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="shop-grid" role="tabpanel" aria-labelledby="shop-grid-tab">
                     <div class="row justify-content-center">
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-1.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
+                        <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="col-lg-3 col-md-6 col-sm-8">
+                                <div class="singel-publication mt-30">
+                                    <div class="image">
+                                        <img src="<?php echo e(asset('products/' . $product->image)); ?>" alt="Publication">
+                                        <div class="add-cart">
+                                            <ul>
+                                                <li><a href="<?php echo e(route('eacademy.cart')); ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Magazine</h6></a>
-                                        <span>$50.00</span>
+                                    <div class="cont">
+                                        <div class="name">
+                                            <a href="<?php echo e(route('eacademy.shop-single', $product)); ?>"><h6><?php echo e($product->title); ?></h6></a>
+                                            <span>$<?php echo e($product->price); ?></span>
+                                        </div>
+                                        <div class="button text-right">
+                                            <a href="<?php echo e(route('eacademy.cart.add', $product)); ?>" class="main-btn">Buy Now</a>
+                                        </div>
                                     </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-2.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Notebook </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-3.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Staionary set </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-4.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-5.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-6.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-7.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Magazine </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-8">
-                            <div class="singel-publication mt-30">
-                                <div class="image">
-                                    <img src="<?php echo e(asset('backend/images/publication/p-8.jpg')); ?>" alt="Publication">
-                                    <div class="add-cart">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="cont">
-                                    <div class="name">
-                                        <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                        <span>$50.00</span>
-                                    </div>
-                                    <div class="button text-right">
-                                        <a href="cart.php" class="main-btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div> <!-- singel publication -->
-                        </div>
+                                </div> <!-- singel publication -->
+                            </div>
+
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo e($products->links()); ?>
+
+
                     </div> <!-- row -->
                 </div>
                 <div class="tab-pane fade" id="shop-list" role="tabpanel" aria-labelledby="shop-list-tab">
                     <div class="row">
+                        <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-lg-6">
                             <div class="singel-publication mt-30">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="image">
-                                            <img src="<?php echo e(asset('backend/images/publication/p-1.jpg')); ?>" alt="Publication">
+                                            <img src="<?php echo e(asset('products/'. $product->image)); ?>" alt="Publication">
                                             <div class="add-cart">
                                                 <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="<?php echo e(route('eacademy.cart')); ?>"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -247,110 +107,22 @@
                                     <div class="col-sm-6">
                                         <div class="cont">
                                             <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
+                                                <a href="<?php echo e(route('eacademy.shop-single', $product)); ?>"><h6><?php echo e($product->title); ?></h6></a>
+                                                <span>$<?php echo e($product->price); ?></span>
                                             </div>
                                             <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
+                                                <p><?php echo e($product->description); ?></p>
                                             </div>
                                             <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
+                                                <a href="<?php echo e(route('eacademy.cart')); ?>" class="main-btn">Buy Now</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div> <!-- row -->
                             </div> <!-- singel publication -->
                         </div>
-                        <div class="col-lg-6">
-                            <div class="singel-publication mt-30">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="image">
-                                            <img src="<?php echo e(asset('backend/images/publication/p-2.jpg')); ?>" alt="Publication">
-                                            <div class="add-cart">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="cont">
-                                            <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
-                                            </div>
-                                            <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
-                                            </div>
-                                            <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- row -->
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="singel-publication mt-30">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="image">
-                                            <img src="<?php echo e(asset('backend/images/publication/p-3.jpg')); ?>" alt="Publication">
-                                            <div class="add-cart">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="cont">
-                                            <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
-                                            </div>
-                                            <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
-                                            </div>
-                                            <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- row -->
-                            </div> <!-- singel publication -->
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="singel-publication mt-30">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="image">
-                                            <img src="<?php echo e(asset('backend/images/publication/p-4.jpg')); ?>" alt="Publication">
-                                            <div class="add-cart">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="cont">
-                                            <div class="name">
-                                                <a href="shop-singel.php"><h6>Set for life </h6></a>
-                                                <span>$50.00</span>
-                                            </div>
-                                            <div class="description pt-10">
-                                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
-                                            </div>
-                                            <div class="button">
-                                                <a href="cart.php" class="main-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- row -->
-                            </div> <!-- singel publication -->
-                        </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                     </div> <!-- row -->
                 </div>
             </div> <!-- tab content -->

@@ -96,9 +96,6 @@
                     <div class="col-lg-4">
                         <div class="header-social text-lg-right text-center">
                             <ul>
-                                {{-- <li class="nav-item">
-                                        <a href="{{ route('login') }}"  style="color: #fff; ">Login</a> <span>/</span> <a href="{{ route('register') }}"  style="color: #fff; ">sign in</a>
-                                    </li> --}}
 
                                 <li class="nav-item">
                                      @guest
@@ -115,6 +112,12 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                         </form>
+
+                                        @if(auth()->user()->role === 'admin')
+                                            <a href="{{ route('dashboard.index') }}" class="btn btn-sm btn-primary" style="color: #fff; margin-left: 10px;" target="_blank">
+                                                Dashboard
+                                            </a>
+                                        @endif
                                     @endauth
                                 </li>
 

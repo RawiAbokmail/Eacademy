@@ -23,55 +23,22 @@
                             <th class="pro-remove">Remove</th>
                         </tr>
                         </thead>
+
                         <tbody>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                                <img class="img-fluid" src="<?php echo e(asset('backend/images/publication/p-1.jpg')); ?>"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Zeon Zen 4 Pro</a></td>
-                            <td class="pro-price"><span>$295.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="1"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$295.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                                <img class="img-fluid" src="<?php echo e(asset('backend/images/publication/p-2.jpg')); ?>"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Aquet Drone D 420</a></td>
-                            <td class="pro-price"><span>$275.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="2"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$550.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                            <img class="img-fluid" src="<?php echo e(asset('backend/images/publication/p-3.jpg')); ?>"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Game Station X 22</a></td>
-                            <td class="pro-price"><span>$295.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="1"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$295.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="pro-thumbnail"><a href="#">
-                            <img class="img-fluid" src="<?php echo e(asset('backend/images/publication/p-4.jpg')); ?>"
-                                width="100" alt="Product"/></a></td>
-                            <td class="pro-title"><a href="#">Roxxe Headphone Z 75 </a></td>
-                            <td class="pro-price"><span>$110.00</span></td>
-                            <td class="pro-quantity">
-                                <div class="pro-qty"><input type="text" value="1"></div>
-                            </td>
-                            <td class="pro-subtotal"><span>$110.00</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                        </tr>
+                            <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr>
+
+                                <td class="pro-thumbnail"><img src="<?php echo e(asset('products/' . $item['image'])); ?>" width="100" alt="Product"></td>
+                                <td class="pro-title"><?php echo e(data_get($item, 'title')); ?></td>
+                                
+                                <td class="pro-price">$<?php echo e($item['price']); ?></td>
+                                <td class="pro-quantity">
+                                    <input type="number" value="<?php echo e($item['quantity']); ?>" min="1">
+                                </td>
+                                <td class="pro-subtotal">$<?php echo e($item['price'] * $item['quantity']); ?></td>
+                                <td class="pro-remove"><a href="<?php echo e(route('eacademy.cart.remove', $id)); ?>"><i class="fa fa-trash-o"></i></a></td>
+                            </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
@@ -97,26 +64,37 @@
                 <div class="cart-calculator-wrapper">
                     <div class="cart-calculate-items">
                         <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th colspan="2">Cart Totals</th>
-                                </tr>
-                                <tr>
-                                    <td>Sub Total</td>
-                                    <td>$230</td>
-                                </tr>
-                                <tr>
-                                    <td>Shipping</td>
-                                    <td>$70</td>
-                                </tr>
-                                <tr>
-                                    <td>Total</td>
-                                    <td class="total-amount">$300</td>
-                                </tr>
-                            </table>
+                            <?php
+                                $cart = session('cart', []);
+                                $subTotal = array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cart));
+                                $shipping = $subTotal > 0 ? 70 : 0; // إذا السلة فارغة، الشحن 0
+                                $total = $subTotal + $shipping;
+                            ?>
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">Cart Totals</th>
+                            </tr>
+                            <tr>
+                                <td>Sub Total</td>
+                                <td>$<?php echo e(number_format($subTotal, 2)); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td>$<?php echo e(number_format($shipping, 2)); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td class="total-amount">$<?php echo e(number_format($total, 2)); ?></td>
+                            </tr>
+                        </table>
                         </div>
                     </div>
-                    <a href="checkout.php" class="btn-add-to-cart">Proceed To Checkout</a>
+                    <form action="<?php echo e(route('eacademy.checkout')); ?>" method="GET">
+                    <?php echo csrf_field(); ?>
+                    <button type="submit" class="btn-add-to-cart">Proceed To Checkout</button>
+                </form>
+
                 </div>
             </div>
         </div>
