@@ -40,7 +40,7 @@
                       <div class="cont">
                           <h3>{{ $blog->title }}</h3>
                           <ul>
-                               <li><a href="#"><i class="fa fa-calendar"></i>{{ $blog->created_at }}</a></li>
+                               <li><a href="#"><i class="fa fa-calendar"></i>{{ \Carbon\Carbon::parse($blog->created_at)->format('d F Y') }}</a></li>
                                <li><a href="#"><i class="fa fa-user"></i>Mark anthem</a></li>
                                <li><a href="#"><i class="fa fa-tags"></i> @foreach ($blog->tags as $tag)
                                 <span class="badge">{{ $tag->name }}</span>

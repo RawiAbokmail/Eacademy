@@ -338,15 +338,16 @@
                                 <h3>Upcoming events</h3>
                             </div> <!-- event title -->
                             <ul>
-                                <li>
+                                <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li>
                                     <div class="singel-event">
-                                        <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                                        <a href="events-singel.html"><h4>Campus clean workshop</h4></a>
-                                        <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                                        <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
+                                        <span><i class="fa fa-calendar"></i> <?php echo e(\Carbon\Carbon::parse($event->duration)->format('d F Y')); ?></span>
+                                        <a href="<?php echo e(route('eacademy.events-single', $event)); ?>"><h4><?php echo e($event->title); ?></h4></a>
+                                        <span><i class="fa fa-clock-o"></i><?php echo e(\Carbon\Carbon::parse($event->time_start)->format('h:i A')); ?> - <?php echo e(\Carbon\Carbon::parse($event->time_end)->format('h:i A')); ?></span>
+                                        <span><i class="fa fa-map-marker"></i> <?php echo e($event->location); ?></span>
                                     </div>
                                 </li>
-                                
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div> <!-- event 2 -->
                     </div>
@@ -373,76 +374,41 @@
                 <div class="col-lg-6">
                     <div class="singel-news mt-30">
                         <div class="news-thum pb-25">
-                            <img src="<?php echo e(asset('backend/images/news/n-1.jpg')); ?>" alt="News">
+                            <img src="<?php echo e(asset('uploads/' . $bigBlog->image)); ?>" alt="News">
                         </div>
                         <div class="news-cont">
                             <ul>
-                                <li><i class="fa fa-calendar"></i>2 December 2018 </li>
-                                <li><span>By</span> Adam linn</li>
+                                <li><i class="fa fa-calendar"></i> <?php echo e(\Carbon\Carbon::parse($bigBlog->created_at)->format('d F Y')); ?></li>
+                                <li><span>By</span> <?php echo e($admin->name); ?></li>
                             </ul>
-                            <a href="blog-singel.php"><h3>Tips to grade high cgpa in university life</h3></a>
-                            <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt .</p>
+                            <a href="<?php echo e(route('eacademy.blog-single', $bigBlog)); ?>"><h3><?php echo e($bigBlog->title); ?></h3></a>
+                            <p><?php echo e($bigBlog->content); ?></p>
                         </div>
                     </div> <!-- singel news -->
                 </div>
                 <div class="col-lg-6">
-                    <div class="singel-news news-list">
+                    <?php $__currentLoopData = $blogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $blog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="singel-news news-list">
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="news-thum mt-30">
-                                    <img src="<?php echo e(asset('backend/images/news/ns-1.jpg')); ?>" alt="News">
+                                    <img src="<?php echo e(asset('uploads/' . $blog->image)); ?>" alt="News">
                                 </div>
                             </div>
                             <div class="col-sm-8">
                                 <div class="news-cont mt-30">
                                     <ul>
-                                        <li><i class="fa fa-calendar"></i>2 December 2018</li>
-                                        <li><span>By</span> Adam linn</li>
+                                        <li><i class="fa fa-calendar"></i> <?php echo e(\Carbon\Carbon::parse($blog->created_at)->format('d F Y')); ?></li>
+                                        <li><span>By</span> <?php echo e($admin->name); ?></li>
                                     </ul>
-                                    <a href="blog-singel.php"><h3>Intellectual communication</h3></a>
-                                    <p>Gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons  vel.</p>
+                                    <a href="<?php echo e(route('eacademy.blog-single', $blog)); ?>"><h3><?php echo e($blog->title); ?></h3></a>
+                                    <p><?php echo e($blog->content); ?></p>
                                 </div>
                             </div>
                         </div> <!-- row -->
                     </div> <!-- singel news -->
-                    <div class="singel-news news-list">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="news-thum mt-30">
-                                    <img src="<?php echo e(asset('backend/images/news/ns-2.jpg')); ?>" alt="News">
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="news-cont mt-30">
-                                    <ul>
-                                        <li><i class="fa fa-calendar"></i>2 December 2018</li>
-                                        <li><span>By</span> Adam linn</li>
-                                    </ul>
-                                    <a href="blog-singel.php"><h3>Study makes you perfect</h3></a>
-                                    <p>Gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons  vel.</p>
-                                </div>
-                            </div>
-                        </div> <!-- row -->
-                    </div> <!-- singel news -->
-                    <div class="singel-news news-list">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="news-thum mt-30">
-                                    <img src="<?php echo e(asset('backend/images/news/ns-3.jpg')); ?>" alt="News">
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="news-cont mt-30">
-                                    <ul>
-                                        <li><i class="fa fa-calendar"></i>2 December 2018</li>
-                                        <li><span>By</span> Adam linn</li>
-                                    </ul>
-                                    <a href="blog-singel.php"><h3>Technology edcution is now....</h3></a>
-                                    <p>Gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons  vel.</p>
-                                </div>
-                            </div>
-                        </div> <!-- row -->
-                    </div> <!-- singel news -->
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
                 </div>
             </div> <!-- row -->
         </div> <!-- container -->

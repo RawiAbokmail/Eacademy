@@ -19,13 +19,20 @@ class FrontController extends Controller
 {
     function index()
     {
+
         $courses = Course::all();
         $people = User::count();
         $teachersCount = User::where('role', 'teacher')->count();
         $studentsCount = User::where('role', 'student')->count();
         $coursesCount = Course::count();
         $teachers = User::where('role', 'teacher')->latest()->paginate(4);
-        return view('eacademy.index', compact('courses', 'studentsCount', 'coursesCount', 'people', 'teachersCount', 'teachers'));
+        $events = Event::latest()->take(3)->get();
+        $admin = \App\Models\User::where('role', 'admin')->first();
+        $bigBlog = Blog::first();
+        $blogs = Blog::latest()->take(3)->get();
+
+
+        return view('eacademy.index', compact('courses', 'studentsCount', 'coursesCount', 'people', 'teachersCount', 'teachers', 'events', 'admin', 'bigBlog', 'blogs'));
     }
 
     function about()

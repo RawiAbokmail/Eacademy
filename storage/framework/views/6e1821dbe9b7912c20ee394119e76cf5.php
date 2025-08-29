@@ -39,7 +39,7 @@
                       <div class="cont">
                           <h3><?php echo e($blog->title); ?></h3>
                           <ul>
-                               <li><a href="#"><i class="fa fa-calendar"></i><?php echo e($blog->created_at); ?></a></li>
+                               <li><a href="#"><i class="fa fa-calendar"></i><?php echo e(\Carbon\Carbon::parse($blog->created_at)->format('d F Y')); ?></a></li>
                                <li><a href="#"><i class="fa fa-user"></i>Mark anthem</a></li>
                                <li><a href="#"><i class="fa fa-tags"></i> <?php $__currentLoopData = $blog->tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <span class="badge"><?php echo e($tag->name); ?></span>
