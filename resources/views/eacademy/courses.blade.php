@@ -81,13 +81,14 @@
                                             <a href="#"><img src="{{ asset('uploads/' . $course->teacher->image) }}" alt="teacher"></a>
                                         </div>
                                         <div class="name">
-                                            <a href="teachers-singel.php"><h6>{{ $course->teacher->name }}</h6></a>
+                                            <a href="{{ route('eacademy.teachers-single', $course->teacher) }}"><h6>{{ $course->teacher->name }}</h6></a>
                                         </div>
                                     </div>
                                 </div>
                             </div> <!-- singel course -->
                         </div>
                         @endforeach
+                        
 
                     </div> <!-- row -->
                 </div>

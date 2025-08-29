@@ -18,9 +18,9 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function teacher()
+     public function teacher()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(User::class);
     }
 
     public function lectures()

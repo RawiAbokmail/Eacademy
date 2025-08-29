@@ -7,6 +7,7 @@ use App\Http\Requests\CourseRequest;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,7 +28,7 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $teachers = Teacher::all();
+        $teachers = User::where('role', 'teacher')->get(); // Assuming you want to get teachers with a specific role
         return view('dashboard.courses.create', compact('categories', 'teachers'));
     }
 
@@ -80,7 +81,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $categories = Category::all();
-        $teachers = Teacher::all();
+        $teachers = User::where('role', 'teacher')->get();
         return view('dashboard.courses.edit', compact('course', 'categories', 'teachers'));
     }
 
@@ -120,7 +121,7 @@ class CourseController extends Controller
                 if ($course->image && file_exists($fullPath)) {
                     unlink($fullPath);
                 }
-           
+
             $path = $request->file('image')->store('uploads', 'custom');
             $data['image'] = $path;
         }

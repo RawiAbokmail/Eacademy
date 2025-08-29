@@ -24,7 +24,8 @@ class FrontController extends Controller
         $teachersCount = User::where('role', 'teacher')->count();
         $studentsCount = User::where('role', 'student')->count();
         $coursesCount = Course::count();
-        return view('eacademy.index', compact('courses', 'studentsCount', 'coursesCount', 'people', 'teachersCount'));
+        $teachers = User::where('role', 'teacher')->latest()->paginate(4);
+        return view('eacademy.index', compact('courses', 'studentsCount', 'coursesCount', 'people', 'teachersCount', 'teachers'));
     }
 
     function about()
@@ -45,7 +46,8 @@ class FrontController extends Controller
 
     function courses_single(Course $course)
     {
-        $teachers = Teacher::all();
+        // $teachers = Teacher::all();
+        $teachers = User::where('role', 'teacher')->get();
         $categories = Category::all();
         $lectures = $course->lectures()->latest()->get();
 
@@ -78,8 +80,24 @@ class FrontController extends Controller
 
     function teachers_single(User $teacher)
     {
+        $relatedCourses = Course::where('teacher_id', $teacher->id)
+            ->where('id', '!=', null)
+            ->latest()
+            ->take(2)
+            ->get();
 
-        return view('eacademy.teachers-single', compact('teacher'));
+        // $course = Course::where('teacher_id', $teacher->id)->first();
+        // if (!$course) {
+        //     $relatedCourses = collect(); // Empty collection if no courses found
+        //     return view('eacademy.teachers-single', compact('teacher', 'relatedCourses'));
+        // }
+        // $relatedCourses = Course::where('teacher_id', $course->teacher_id)
+        //     ->where('id', '!=', $course->id)
+        //     ->latest()
+        //     ->take(2)
+        //     ->get();
+
+        return view('eacademy.teachers-single', compact('teacher', 'relatedCourses'));
     }
 
     function blog(Request $request)

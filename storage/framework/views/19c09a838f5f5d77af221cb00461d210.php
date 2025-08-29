@@ -1,7 +1,17 @@
 <?php $__env->startSection('title', 'Home'); ?>
 <?php $__env->startSection( 'content'); ?>
 
+<?php $__env->startSection('css'); ?>
+    <style>
+.singel-course-2 > .thum .course-teacher > .thum img{
+    max-width: 50px;
+}
 
+.teachers-2 .teachers-2-singel{
+    max-height: 165px;
+}
+    </style>
+<?php $__env->stopSection(); ?>
    <!--====== SLIDER PART START ======-->
 
     <section id="slider-part" class="slider-active">
@@ -194,7 +204,7 @@
                                     <a href="courses-singel.html"><img src="<?php echo e(asset('uploads/' . $course->teacher->image)); ?>" alt="teacher"></a>
                                 </div>
                                 <div class="name">
-                                    <a href="teachers-singel.php"><h6><?php echo e($course->teacher->name); ?></h6></a>
+                                    <a href="<?php echo e(route('eacademy.teachers-single', $course->teacher)); ?>"><h6><?php echo e($course->teacher->name); ?></h6></a>
                                 </div>
                                 <div class="review">
                                     <ul>
@@ -213,6 +223,7 @@
                     </div> <!-- singel course -->
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                 
             </div> <!-- course slied -->
         </div> <!-- container -->
@@ -259,54 +270,21 @@
                     </div> <!-- section title -->
                     <div class="teachers-2">
                         <div class="row">
-                            <div class="col-md-6">
+                            <?php $__currentLoopData = $teachers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teacher): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="col-md-6">
                                 <div class="teachers-2-singel mt-30">
                                     <div class="thum">
-                                        <img src="<?php echo e(asset('backend/images/teachers/teacher-2/tc-1.jpg')); ?>" alt="Teacher">
+                                        <img src="<?php echo e(asset('uploads/' . $teacher->image)); ?>" alt="Teacher">
                                     </div>
                                     <div class="cont">
-                                        <a href="teachers-singel.php"><h5>Mark anthem</h5></a>
-                                        <p>JAVA Expert</p>
+                                        <a href="<?php echo e(route('eacademy.teachers-single', $teacher)); ?>"><h5><?php echo e($teacher->name); ?></h5></a>
+                                        <p><?php echo e($teacher->job); ?></p>
                                         <span><i class="fa fa-book"></i>10 Courses</span>
                                     </div>
                                 </div> <!-- teachers 2 singel -->
                             </div>
-                            <div class="col-md-6">
-                                <div class="teachers-2-singel mt-30">
-                                    <div class="thum">
-                                        <img src="<?php echo e(asset('backend/images/teachers/teacher-2/tc-2.jpg')); ?>" alt="Teacher">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="teachers-singel.php"><h5>Hellen Mark</h5></a>
-                                        <p>Laravel Expert</p>
-                                        <span><i class="fa fa-book"></i>05 Courses</span>
-                                    </div>
-                                </div> <!-- teachers 2 singel -->
-                            </div>
-                            <div class="col-md-6">
-                                <div class="teachers-2-singel mt-30">
-                                    <div class="thum">
-                                        <img src="<?php echo e(asset('backend/images/teachers/teacher-2/tc-1.jpg')); ?>" alt="Teacher">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="teachers-singel.php"><h5>Maria Noor</h5></a>
-                                        <p>JAVA Expert</p>
-                                        <span><i class="fa fa-book"></i>10 Courses</span>
-                                    </div>
-                                </div> <!-- teachers 2 singel -->
-                            </div>
-                            <div class="col-md-6">
-                                <div class="teachers-2-singel mt-30">
-                                    <div class="thum">
-                                        <img src="<?php echo e(asset('backend/images/teachers/teacher-2/tc-1.jpg')); ?>" alt="Teacher">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="teachers-singel.php"><h5>Alan hen</h5></a>
-                                        <p>Laravel Expert</p>
-                                        <span><i class="fa fa-book"></i>05 Courses</span>
-                                    </div>
-                                </div> <!-- teachers 2 singel -->
-                            </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            
                         </div> <!-- row -->
                     </div> <!-- teachers 2 -->
                 </div>
@@ -368,22 +346,7 @@
                                         <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="singel-event">
-                                        <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                                        <a href="events-singel.html"><h4>Tech Summit</h4></a>
-                                        <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                                        <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="singel-event">
-                                        <span><i class="fa fa-calendar"></i> 2 December 2018</span>
-                                        <a href="events-singel.html"><h4>Enviroement conference</h4></a>
-                                        <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                                        <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                                    </div>
-                                </li>
+                                
                             </ul>
                         </div> <!-- event 2 -->
                     </div>

@@ -2,7 +2,17 @@
 @section('title', 'Home')
 @section( 'content')
 
+@section('css')
+    <style>
+.singel-course-2 > .thum .course-teacher > .thum img{
+    max-width: 50px;
+}
 
+.teachers-2 .teachers-2-singel{
+    max-height: 165px;
+}
+    </style>
+@endsection
    <!--====== SLIDER PART START ======-->
 
     <section id="slider-part" class="slider-active">
@@ -195,7 +205,7 @@
                                     <a href="courses-singel.html"><img src="{{ asset('uploads/' . $course->teacher->image) }}" alt="teacher"></a>
                                 </div>
                                 <div class="name">
-                                    <a href="teachers-singel.php"><h6>{{ $course->teacher->name }}</h6></a>
+                                    <a href="{{ route('eacademy.teachers-single', $course->teacher) }}"><h6>{{ $course->teacher->name }}</h6></a>
                                 </div>
                                 <div class="review">
                                     <ul>
@@ -214,6 +224,7 @@
                     </div> <!-- singel course -->
                 </div>
                 @endforeach
+
                 {{-- <div class="col-lg-4">
                     <div class="singel-course-2">
                         <div class="thum">
@@ -397,19 +408,21 @@
                     </div> <!-- section title -->
                     <div class="teachers-2">
                         <div class="row">
-                            <div class="col-md-6">
+                            @foreach ($teachers as $teacher)
+                                <div class="col-md-6">
                                 <div class="teachers-2-singel mt-30">
                                     <div class="thum">
-                                        <img src="{{ asset('backend/images/teachers/teacher-2/tc-1.jpg') }}" alt="Teacher">
+                                        <img src="{{ asset('uploads/' . $teacher->image) }}" alt="Teacher">
                                     </div>
                                     <div class="cont">
-                                        <a href="teachers-singel.php"><h5>Mark anthem</h5></a>
-                                        <p>JAVA Expert</p>
+                                        <a href="{{ route('eacademy.teachers-single', $teacher) }}"><h5>{{ $teacher->name }}</h5></a>
+                                        <p>{{ $teacher->job }}</p>
                                         <span><i class="fa fa-book"></i>10 Courses</span>
                                     </div>
                                 </div> <!-- teachers 2 singel -->
                             </div>
-                            <div class="col-md-6">
+                            @endforeach
+                            {{-- <div class="col-md-6">
                                 <div class="teachers-2-singel mt-30">
                                     <div class="thum">
                                         <img src="{{ asset('backend/images/teachers/teacher-2/tc-2.jpg') }}" alt="Teacher">
@@ -444,7 +457,7 @@
                                         <span><i class="fa fa-book"></i>05 Courses</span>
                                     </div>
                                 </div> <!-- teachers 2 singel -->
-                            </div>
+                            </div> --}}
                         </div> <!-- row -->
                     </div> <!-- teachers 2 -->
                 </div>
@@ -506,7 +519,7 @@
                                         <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
                                     </div>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <div class="singel-event">
                                         <span><i class="fa fa-calendar"></i> 2 December 2018</span>
                                         <a href="events-singel.html"><h4>Tech Summit</h4></a>
@@ -521,7 +534,7 @@
                                         <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
                                         <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div> <!-- event 2 -->
                     </div>

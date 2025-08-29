@@ -406,7 +406,7 @@
                                                 <a href="#"><img src="<?php echo e(asset('uploads/' . $related->teacher->image)); ?>" alt="teacher"></a>
                                             </div>
                                             <div class="name">
-                                                <a href="teachers-singel.php"><h6><?php echo e($related->teacher->name); ?></h6></a>
+                                                <a href="<?php echo e(route('eacademy.teachers-single', $course->teacher)); ?>"><h6><?php echo e($related->teacher->name); ?></h6></a>
                                             </div>
                                             <div class="admin">
                                                 <ul>
